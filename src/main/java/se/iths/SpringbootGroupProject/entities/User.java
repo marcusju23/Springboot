@@ -14,8 +14,17 @@ public class User {
     private String userName;
     @Lob
     private Byte[] image;
-    private String name;
+    private String firstName;
+    private String lastName;
     private String email;
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getUserName() {
         return userName;
@@ -33,12 +42,12 @@ public class User {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
