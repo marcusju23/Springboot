@@ -1,0 +1,15 @@
+# Maven artifacts and build directories
+.mvn/
+
+# Git configuration and repository information
+.git/
+
+# Temporary and log files
+*.log
+*.tmp
+.DS_Store/
+
+# IDE and editor configurations
+.github/
+.idea/
+.vscode/
