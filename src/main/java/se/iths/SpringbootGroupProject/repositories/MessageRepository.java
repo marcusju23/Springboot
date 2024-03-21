@@ -3,12 +3,12 @@ package se.iths.SpringbootGroupProject.repositories;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.ListCrudRepository;
 import se.iths.SpringbootGroupProject.entities.Message;
 
 import java.util.List;
 
-public interface MessageRepository extends CrudRepository<Message, Long> {
+public interface MessageRepository extends ListCrudRepository<Message, Long> {
 
     List<Message> findAllByPrivateMessageIsFalse();
 
