@@ -19,7 +19,13 @@ public class Message {
     private String title;
     private String messageBody;
     private boolean privateMessage;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    public User getUser() {
+        return user;
+    }
 
     public Long getId() {
         return id;
