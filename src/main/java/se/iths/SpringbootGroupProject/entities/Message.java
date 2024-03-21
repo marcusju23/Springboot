@@ -18,7 +18,7 @@ public class Message {
 
     private String title;
     private String messageBody;
-    private boolean isPrivateMessage;
+    private boolean privateMessage;
 
 
     public Long getId() {
@@ -54,11 +54,11 @@ public class Message {
     }
 
     public boolean isPrivateMessage() {
-        return isPrivateMessage;
+        return privateMessage;
     }
 
     public void setPrivateMessage(boolean privateMessage) {
-        isPrivateMessage = privateMessage;
+        this.privateMessage = privateMessage;
     }
 
 }
