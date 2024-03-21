@@ -1,4 +1,4 @@
-name: SpringBootGroupProject CI
+name: CI Build
 
 on:
   push:
