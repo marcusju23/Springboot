@@ -18,8 +18,18 @@ public class Message {
 
     private String title;
     private String messageBody;
-    private boolean isPrivateMessage;
+    private boolean privateMessage;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -54,11 +64,11 @@ public class Message {
     }
 
     public boolean isPrivateMessage() {
-        return isPrivateMessage;
+        return privateMessage;
     }
 
     public void setPrivateMessage(boolean privateMessage) {
-        isPrivateMessage = privateMessage;
+        this.privateMessage = privateMessage;
     }
 
 }

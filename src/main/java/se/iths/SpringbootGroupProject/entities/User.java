@@ -20,18 +20,6 @@ public class User {
     private String lastName;
     private String email;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "user_id")
-    List<Message> messageList = new ArrayList<>();
-
-    public List<Message> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
-    }
-
     public String getLastName() {
         return lastName;
     }
