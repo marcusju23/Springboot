@@ -32,6 +32,10 @@ public class User {
         this.messageList = messageList;
     }
 
+    public void addMessage (Message message){
+        messageList.add(message);
+    }
+
     public String getLastName() {
         return lastName;
     }
