@@ -1,4 +1,4 @@
-package se.iths.SpringbootGroupProject.repository;
+package se.iths.SpringbootGroupProject.repositories;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
