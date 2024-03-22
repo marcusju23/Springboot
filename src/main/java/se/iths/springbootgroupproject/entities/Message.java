@@ -1,4 +1,4 @@
-package se.iths.SpringbootGroupProject.entities;
+package se.iths.springbootgroupproject.entities;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;

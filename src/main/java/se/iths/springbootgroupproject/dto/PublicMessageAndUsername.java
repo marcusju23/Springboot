@@ -1,4 +1,4 @@
-package se.iths.SpringbootGroupProject.dto;
+package se.iths.springbootgroupproject.dto;
 
 import java.io.Serializable;
 import java.time.LocalDate;
