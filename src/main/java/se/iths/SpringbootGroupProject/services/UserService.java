@@ -17,12 +17,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    @Cacheable("firstName")
+    // Needs queries in UserRepository
+    // @Cacheable("firstName")
     public List<User> findByFirstName(String firstName) {
         return userRepository.findByFirstName(firstName);
     }
 
-    @Cacheable("lastName")
+    // Needs queries in UserRepository
+    // @Cacheable("lastName")
     public List<User> findByLastName(String lastName) {
         return userRepository.findByLastName(lastName);
     }
