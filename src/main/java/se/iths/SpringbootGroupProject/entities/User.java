@@ -3,8 +3,6 @@ package se.iths.SpringbootGroupProject.entities;
 import jakarta.persistence.*;
 import org.hibernate.proxy.HibernateProxy;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +13,7 @@ public class User {
     @Column(unique = true)
     private String userName;
     @Lob
+    @Column(name = "image")
     private Byte[] image;
     private String firstName;
     private String lastName;
