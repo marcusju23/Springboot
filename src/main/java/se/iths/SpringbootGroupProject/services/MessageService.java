@@ -3,12 +3,14 @@ package se.iths.SpringbootGroupProject.services;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.iths.SpringbootGroupProject.dto.PublicMessageAndUsername;
 import se.iths.SpringbootGroupProject.repositories.MessageRepository;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class MessageService {
 
     MessageRepository messageRepository;
