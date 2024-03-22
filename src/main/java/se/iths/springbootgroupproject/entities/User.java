@@ -13,6 +13,7 @@ public class User {
     @Column(unique = true)
     private String userName;
     @Lob
+    @Column(name = "image")
     private Byte[] image;
     private String firstName;
     private String lastName;
