@@ -3,6 +3,7 @@ package se.iths.SpringbootGroupProject.controllers;
 import org.springframework.web.bind.annotation.*;
 import se.iths.SpringbootGroupProject.dto.PublicMessageAndUsername;
 import se.iths.SpringbootGroupProject.repositories.MessageRepository;
+import se.iths.SpringbootGroupProject.services.MessageService;
 
 import java.util.List;
 
@@ -10,21 +11,15 @@ import java.util.List;
 @RequestMapping("/api/")
 public class GuestController {
 
-    private final MessageRepository messageRepository;
+    private final MessageService messageService;
 
-    public GuestController(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+    public GuestController(MessageService messageService) {
+        this.messageService = messageService;
     }
 
     @GetMapping("messages")
     List<PublicMessageAndUsername> all(){
-            return messageRepository.findAllByPrivateMessageIsFalse()
-                    .stream()
-                    .map(message -> new PublicMessageAndUsername(
-                            message.getDate(),
-                            message.getTitle(),
-                            message.getMessageBody(),
-                            message.getUser().getUserName())).toList();
+            return messageService.findAllByPrivateMessageIsFalse();
     }
 
 }
