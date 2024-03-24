@@ -1,11 +1,11 @@
-package se.iths.SpringbootGroupProject.services;
+package se.iths.springbootgroupproject.services;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import se.iths.SpringbootGroupProject.entities.User;
-import se.iths.SpringbootGroupProject.repositories.UserRepository;
+import se.iths.springbootgroupproject.entities.User;
+import se.iths.springbootgroupproject.repositories.UserRepository;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package se.iths.SpringbootGroupProject.configurations;
+package se.iths.springbootgroupproject.configurations;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
