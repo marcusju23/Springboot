@@ -1,10 +1,10 @@
-package se.iths.SpringbootGroupProject.repositories;
+package se.iths.springbootgroupproject.repositories;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
-import se.iths.SpringbootGroupProject.entities.Message;
+import se.iths.springbootgroupproject.entities.Message;
 
 import java.util.List;
 
