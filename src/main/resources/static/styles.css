@@ -1,0 +1,78 @@
+.dropdown {
+    position: fixed;
+    top: 10px; /* Justera vertikalt avstånd från toppen */
+    right: 10px; /* Justera horisontellt avstånd från höger */
+}
+
+.dropdown-content {
+    display: none;
+    position: fixed; /* Ändra till relativ position */
+    top: 30px; /* Justera vertikalt avstånd från förälderelementet */
+    right: 0; /* Placera rutan helt till höger */
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Main table styles */
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px auto;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 800px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Header row styles */
+.styled-table thead tr {
+    background-color: #ff0099;
+    color: #ffffff;
+    text-align: left;
+}
+
+/* Table cell styles */
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border: 1px solid #a19a9a; /* Add border to each cell */
+}
+
+/* Alternating row background color */
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+/* Active row styles (customize as needed) */
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #ff0099;
+}
+
+/* Border for the last row */
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #ff0099;
+}
+
+.welcome-message{
+    text-align: center;
+    color: indigo;
+    font-family: Verdana, sans-serif;
+
+}

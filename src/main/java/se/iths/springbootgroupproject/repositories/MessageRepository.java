@@ -7,10 +7,13 @@ import org.springframework.data.repository.ListCrudRepository;
 import se.iths.springbootgroupproject.entities.Message;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MessageRepository extends ListCrudRepository<Message, Long> {
 
     List<Message> findAllByPrivateMessageIsFalse();
+
+    Optional<Message> findByTitle(String title);
 
     @Query("""
             update Message m set m.privateMessage = ?1 where m.id = ?2

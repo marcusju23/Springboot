@@ -1,11 +1,12 @@
-package se.iths.SpringbootGroupProject.controllers;
+package se.iths.springbootgroupproject.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import se.iths.SpringbootGroupProject.repositories.MessageRepository;
-import se.iths.SpringbootGroupProject.repositories.UserRepository;
+import se.iths.springbootgroupproject.services.MessageService;
+import se.iths.springbootgroupproject.services.UserService;
 
 @Controller
 @RequestMapping("/web")
@@ -17,11 +18,19 @@ public class WebController {
      *
      * OM TID FINNS-> Alla användare sida: kunna se alla användare och söka på användare
      */
+    private final MessageService messageService;
+    private final UserService userService;
 
+    public WebController(MessageService messageService, UserService userService) {
+        this.messageService = messageService;
+        this.userService = userService;
+    }
 
     @GetMapping("/welcome")
-    public String getWelcomePage(Model model){
-
+    public String getWelcomePage(Model model, HttpServletRequest httpServletRequest){
+        var publicMessages = messageService.findAllByPrivateMessageIsFalse();
+        model.addAttribute("messages",publicMessages);
+        model.addAttribute("httpServletRequest", httpServletRequest);
         return "welcome";
     }
 
