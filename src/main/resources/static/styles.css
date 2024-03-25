@@ -11,7 +11,7 @@
     right: 0; /* Placera rutan helt till höger */
     background-color: #f9f9f9;
     min-width: 120px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -33,7 +33,7 @@
 /* Main table styles */
 .styled-table {
     border-collapse: collapse;
-    margin: 25px auto;
+    margin: 5px auto;
     font-size: 0.9em;
     font-family: sans-serif;
     min-width: 800px;
@@ -70,9 +70,23 @@
     border-bottom: 2px solid #ff0099;
 }
 
-.welcome-message{
+.welcome-message {
     text-align: center;
     color: indigo;
     font-family: Verdana, sans-serif;
 
+}
+
+.arrows {
+    margin: auto;
+    width: 10px;
+    padding: 0;
+    display: flex;
+}
+
+.right{
+    margin-left: 25px;
+}
+.left{
+    margin-left: -25px;
 }

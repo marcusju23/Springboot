@@ -2,6 +2,7 @@ package se.iths.springbootgroupproject.services;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.iths.springbootgroupproject.dto.PublicMessageAndUsername;
@@ -29,6 +30,16 @@ public class MessageService {
                         message.getMessageBody(),
                         message.getUser().getUserName())).toList();
     }
+    @Cacheable("messages")
+    public List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable){
+        return messageRepository.findAllByPrivateMessageIsFalse(pageable)
+                .stream()
+                .map(message -> new PublicMessageAndUsername(
+                        message.getDate(),
+                        message.getTitle(),
+                        message.getMessageBody(),
+                        message.getUser().getUserName())).toList();
+    }
 
     @CacheEvict(value = "messages", allEntries = true)
     public void setMessagePrivacy(boolean isPrivate, Long id) {
@@ -44,5 +55,4 @@ public class MessageService {
     public void editTitle(String updatedTitle, Long id) {
         messageRepository.editTitle(updatedTitle, id);
     }
-
 }
