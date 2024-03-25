@@ -6,5 +6,33 @@
 </head>
 <body>
 <h1 th:text="#{welcome}"></h1>
+
+<table>
+    <thead>
+    <tr>
+        <th th:text="#{title}"></th>
+        <th>Message Body</th>
+        <th>Author</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="">
+        <td>Important Announcement</td>
+        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+        <td>John Doe</td>
+        <td>2024-02-27</td>
+    </tr>
+    <tr>
+        <td>Important Announcement</td>
+        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+        <td>John Doe</td>
+        <td>2024-02-27</td>
+    </tr>
+    <!-- Add more rows as needed -->
+    </tbody>
+
+</table>
+
 </body>
 </html>

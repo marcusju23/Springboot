@@ -1,8 +1,11 @@
 package se.iths.SpringbootGroupProject.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import se.iths.SpringbootGroupProject.repositories.MessageRepository;
+import se.iths.SpringbootGroupProject.repositories.UserRepository;
 
 @Controller
 @RequestMapping("/web")
@@ -14,8 +17,11 @@ public class WebController {
      *
      * OM TID FINNS-> Alla användare sida: kunna se alla användare och söka på användare
      */
+
+
     @GetMapping("/welcome")
-    public String getWelcomePage(){
+    public String getWelcomePage(Model model){
+
         return "welcome";
     }
 
