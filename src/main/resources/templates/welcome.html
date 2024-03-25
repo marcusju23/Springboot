@@ -12,8 +12,8 @@
 <div class="dropdown">
     <i class="gg-globe-alt" id="globe-icon"></i>
     <div class="dropdown-content" id="dropdown-content">
-        <a th:href="@{${httpServletRequest.requestURI} + '?lang=en'}">English</a>
-        <a th:href="@{${httpServletRequest.requestURI} + '?lang=sv'}">Svenska</a>
+        <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=en'}">English</a>
+        <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
     </div>
 </div>
 <script src="/static/script.js"></script>
