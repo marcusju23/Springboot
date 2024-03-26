@@ -19,7 +19,7 @@ public class Message {
     private String title;
     private String messageBody;
     private boolean privateMessage;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
