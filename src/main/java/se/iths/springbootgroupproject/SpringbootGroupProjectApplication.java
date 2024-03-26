@@ -4,8 +4,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import se.iths.springbootgroupproject.entities.Message;
 import se.iths.springbootgroupproject.entities.User;
@@ -21,8 +19,9 @@ public class SpringbootGroupProjectApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringbootGroupProjectApplication.class, args);
 	}
+
+	//For development purpose we init db with some values
 	@Bean
-	@Order(Ordered.HIGHEST_PRECEDENCE)
 	ApplicationRunner databaseInit2(MessageRepository repository, UserRepository userRepository){
 		return args -> {
 			var result = repository.findByTitle("TempTitle");
