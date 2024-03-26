@@ -21,13 +21,7 @@ public class MessageService {
 
     @Cacheable("messages")
     public List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse() {
-        return messageRepository.findAllByPrivateMessageIsFalse()
-                .stream()
-                .map(message -> new PublicMessageAndUsername(
-                        message.getDate(),
-                        message.getTitle(),
-                        message.getMessageBody(),
-                        message.getUser().getUserName())).toList();
+        return messageRepository.findAllByPrivateMessageIsFalse();
     }
 
     @CacheEvict(value = "messages", allEntries = true)

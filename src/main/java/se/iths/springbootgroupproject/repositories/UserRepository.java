@@ -19,6 +19,6 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
             """)
     @Modifying
     @Transactional
-    String updateEmail(String email, Long id);
+    void updateEmail(String email, Long id);
 
 }
