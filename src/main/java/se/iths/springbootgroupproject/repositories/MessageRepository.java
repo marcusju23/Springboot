@@ -1,16 +1,21 @@
 package se.iths.springbootgroupproject.repositories;
 
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.repository.ListPagingAndSortingRepository;
 import se.iths.springbootgroupproject.dto.PublicMessageAndUsername;
 import se.iths.springbootgroupproject.entities.Message;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface MessageRepository extends ListCrudRepository<Message, Long> {
+public interface MessageRepository extends ListCrudRepository<Message, Long>, ListPagingAndSortingRepository<Message, Long> {
 
+    List<Message> findAllByPrivateMessageIsFalse(Pageable pageable);
+    Optional<Message> findByTitle(String title);
     List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse();
 
     @Query("""
