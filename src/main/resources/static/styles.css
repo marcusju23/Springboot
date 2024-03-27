@@ -105,3 +105,11 @@
 .left{
     margin-left: -25px;
 }
+
+.profile-link a {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    color: inherit;
+    text-decoration: none;
+}

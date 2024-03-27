@@ -5,7 +5,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import se.iths.springbootgroupproject.dto.PublicMessageAndUsername;
+import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import se.iths.springbootgroupproject.repositories.MessageRepository;
 
 import java.util.List;
@@ -20,26 +20,46 @@ public class MessageService {
         this.messageRepository = messageRepository;
     }
 
-    @Cacheable("messages")
-    public List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse() {
+    @Cacheable("publicMessages")
+    public List<MessageAndUsername> findAllByPrivateMessageIsFalse() {
         return messageRepository.findAllByPrivateMessageIsFalse();
     }
-    @Cacheable("messages")
-    public List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable){
+    @Cacheable("publicMessages")
+    public List<MessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable){
         return messageRepository.findAllByPrivateMessageIsFalse(pageable);
     }
+    @Cacheable("messages")
+    public List<MessageAndUsername> findAllMessages(Pageable pageable) {
+        return messageRepository.findAll(pageable).getContent().stream()
+                .map(message -> new MessageAndUsername(
+                        message.getDate(),
+                        message.getTitle(),
+                        message.getMessageBody(),
+                        message.getUser().getUserName()))
+                .toList();
+    }
+    @Cacheable("messages")
+    public List<MessageAndUsername> findAllMessages() {
+        return messageRepository.findAll().stream()
+                .map(message -> new MessageAndUsername(
+                        message.getDate(),
+                        message.getTitle(),
+                        message.getMessageBody(),
+                        message.getUser().getUserName()))
+                .toList();
+    }
 
-    @CacheEvict(value = "messages", allEntries = true)
+    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void setMessagePrivacy(boolean isPrivate, Long id) {
         messageRepository.setMessagePrivacy(isPrivate, id);
     }
 
-    @CacheEvict(value = "messages", allEntries = true)
+    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void editMessage(String updatedBody, Long id) {
         messageRepository.editMessage(updatedBody, id);
     }
 
-    @CacheEvict(value = "messages", allEntries = true)
+    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void editTitle(String updatedTitle, Long id) {
         messageRepository.editTitle(updatedTitle, id);
     }
