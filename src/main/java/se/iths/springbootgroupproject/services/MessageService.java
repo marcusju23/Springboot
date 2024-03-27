@@ -22,23 +22,11 @@ public class MessageService {
 
     @Cacheable("messages")
     public List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse() {
-        return messageRepository.findAllByPrivateMessageIsFalse()
-                .stream()
-                .map(message -> new PublicMessageAndUsername(
-                        message.getDate(),
-                        message.getTitle(),
-                        message.getMessageBody(),
-                        message.getUser().getUserName())).toList();
+        return messageRepository.findAllByPrivateMessageIsFalse();
     }
     @Cacheable("messages")
     public List<PublicMessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable){
-        return messageRepository.findAllByPrivateMessageIsFalse(pageable)
-                .stream()
-                .map(message -> new PublicMessageAndUsername(
-                        message.getDate(),
-                        message.getTitle(),
-                        message.getMessageBody(),
-                        message.getUser().getUserName())).toList();
+        return messageRepository.findAllByPrivateMessageIsFalse(pageable);
     }
 
     @CacheEvict(value = "messages", allEntries = true)
