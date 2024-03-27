@@ -7,11 +7,12 @@ import org.springframework.data.repository.ListCrudRepository;
 import se.iths.springbootgroupproject.entities.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends ListCrudRepository<User, Long> {
     List<User> findByFirstName(String firstName);
     List<User> findByLastName(String lastName);
-    User findByUserName(String userName);
+    Optional<User> findByUserName(String userName);
     User findByEmail(String email);
 
     @Query("""
