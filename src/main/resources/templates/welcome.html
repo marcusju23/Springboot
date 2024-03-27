@@ -39,8 +39,8 @@
     <tbody>
     <tr th:each="message : ${messages}">
         <td th:text="${message.title()}">Important Announcement</td>
-        <td th:text="${message.body()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-        <td class="author-cell" th:text="${message.userName()}">John Doe</td>
+        <td th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+        <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
         <td class="date-cell" th:text="${message.date()}">2024-02-27</td>
     </tr>
     </tbody>
