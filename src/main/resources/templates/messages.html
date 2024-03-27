@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GilGang messages</title>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/profile.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script defer src="/static/script.js"></script>
+</head>
+<body>
+<div class="dropdown">
+    <i class="gg-globe-alt" id="globe-icon"></i>
+    <div class="dropdown-content" id="dropdown-content">
+        <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=en'}">English</a>
+        <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
+    </div>
+</div>
+<div class="profile-link">
+    <a th:href="'/web/myprofile'">
+        <i class="gg-profile"></i>
+    </a>
+</div>
+<h1 class="welcome-message" th:text="#{messages.welcome}"></h1>
+<div class="arrows">
+    <a class="left" th:if="${currentPage>0}" th:href="'/web/messages?page='+${currentPage - 1}">
+        <i class="gg-arrow-left-r"></i>
+    </a>
+    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/messages?page='+${currentPage+1}">
+        <i class="gg-arrow-right-r"></i>
+    </a>
+</div>
+<table class="styled-table">
+    <thead>
+    <tr>
+        <th th:text="#{title}"></th>
+        <th th:text="#{body}"></th>
+        <th class ="author-cell-header" th:text="#{author}"></th>
+        <th class ="date-cell-header" th:text="#{date}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="message : ${messages}">
+        <td th:text="${message.title()}">Important Announcement</td>
+        <td th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+        <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
+        <td class="date-cell" th:text="${message.date()}">2024-02-27</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
