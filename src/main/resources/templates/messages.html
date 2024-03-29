@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to GilGang website</title>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
+    <title>GilGang messages</title>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/profile.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles.css">
     <script defer src="/static/script.js"></script>
 </head>
@@ -17,13 +18,17 @@
         <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
     </div>
 </div>
-
-<h1 class="welcome-message" th:text="#{welcome}"></h1>
+<div class="profile-link">
+    <a th:href="'/web/myprofile'">
+        <i class="gg-profile"></i>
+    </a>
+</div>
+<h1 class="welcome-message" th:text="#{messages.welcome}"></h1>
 <div class="arrows">
-    <a class="left" th:if="${currentPage>0}" th:href="'/web/welcome?page=' + ${currentPage - 1}">
+    <a class="left" th:if="${currentPage>0}" th:href="'/web/messages?page='+${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/welcome?page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/messages?page='+${currentPage+1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>

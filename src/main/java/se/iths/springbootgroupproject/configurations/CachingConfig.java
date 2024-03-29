@@ -18,6 +18,7 @@ public class CachingConfig {
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         cacheManager.setCaches(Arrays.asList(
                 new ConcurrentMapCache("messages"),
+                new ConcurrentMapCache("publicMessages"),
                 new ConcurrentMapCache("email"),
                 new ConcurrentMapCache("username")));
         return cacheManager;
