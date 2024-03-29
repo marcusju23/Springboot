@@ -90,3 +90,43 @@
 .left{
     margin-left: -25px;
 }
+
+
+/*--------------------------------------------------------------------*/
+/*
+    Following css is used in Hello as a demo.
+ */
+
+#profile-container{
+    display: flex;
+    width: 80vw;
+    margin-left: 10vw ;
+    justify-content: space-evenly;
+}
+
+#name-container,
+#username-container{
+    font-size: 3vw;
+}
+
+#name,
+#login{
+    margin: 0;
+}
+
+img{
+    display: block;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+#user-information{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+html{
+    font-size: 16px;
+}
