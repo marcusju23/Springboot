@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You are logged in</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+<h1> YOU ARE LOGGED IN </h1>
+<div id="profile-container">
+    <div id="img-container">
+        <img id="profile" th:src="${profilepic}" alt="No image found :/"/>
+    </div>
+    <div id="user-information">
+        <div id="name-container">
+            <label for="name">Name:</label>
+            <p id="name" th:text="${name}"></p>
+        </div>
+        <div id="username-container">
+            <label for="login">Username:</label>
+            <p id="login" th:text="${userName}">default</p>
+        </div>
+    </div>
+</div>
+<p th:text="${all}"></p>
+</body>
+</html>
