@@ -44,7 +44,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationSuccessHandler oauth2LoginSuccessHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler("/web/hello");
+        return new SimpleUrlAuthenticationSuccessHandler("/web/users/profiles/demo");
     }
 
     @Bean
