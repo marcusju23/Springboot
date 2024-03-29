@@ -23,7 +23,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**").permitAll()
-                        .requestMatchers("/web/hello").authenticated()
+                        .requestMatchers("/web/users/profiles/demo").authenticated()
                         .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
