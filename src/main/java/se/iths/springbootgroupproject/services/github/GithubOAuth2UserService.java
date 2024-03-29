@@ -24,7 +24,7 @@ public class GithubOAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauth2User = super.loadUser(userRequest);
         Map<String, Object> attributes = oauth2User.getAttributes();
-        Optional<User> authenticatedUser = Optional.ofNullable(userRepository.findByUserName((String) attributes.get("login")));
+        Optional<User> authenticatedUser = userRepository.findByUserName((String) attributes.get("login"));
         if (authenticatedUser.isEmpty()) {
             User user = createNewUser(attributes);
             userRepository.save(user);
