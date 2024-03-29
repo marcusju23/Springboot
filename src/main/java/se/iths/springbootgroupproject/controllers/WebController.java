@@ -53,7 +53,7 @@ public class WebController {
         return "messages";
     }
 
-    @GetMapping("/hello")
+    @GetMapping("/users/profiles/demo")
     public String userProfile (Model model, @AuthenticationPrincipal OAuth2User principal) {
         /*
             This is the endpoint users are pointed to after oauth2 login.
@@ -74,7 +74,9 @@ public class WebController {
         model.addAttribute("name" , name);
         model.addAttribute("userName", userName);
         model.addAttribute("profilepic",profilePic);
+
+        //Every attribute you can get from github
         model.addAttribute("all", principal);
-        return "hello";
+        return "userprofiledemo";
     }
 }
