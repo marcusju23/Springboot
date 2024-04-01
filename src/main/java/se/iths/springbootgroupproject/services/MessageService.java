@@ -25,6 +25,10 @@ public class MessageService {
         return messageRepository.findAllByPrivateMessageIsFalse();
     }
     @Cacheable("publicMessages")
+    public List<MessageAndUsername> findAllByUserIdAndPrivateMessageIsFalse(Long id){
+        return messageRepository.findAllByUserIdAndPrivateMessageIsFalse(id);
+    }
+    @Cacheable("publicMessages")
     public List<MessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable){
         return messageRepository.findAllByPrivateMessageIsFalse(pageable);
     }
