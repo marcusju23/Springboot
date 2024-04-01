@@ -33,13 +33,13 @@ public class GuestController {
             ),
             @ApiResponse(responseCode = "204", description = "No messages found",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = MessageAndUsername.class)))})
+                            array = @ArraySchema(schema = @Schema(implementation = Object.class)))})
     })
     @GetMapping("messages")
     @ResponseStatus(HttpStatus.OK)
     List<MessageAndUsername> all() {
         var messages = messageService.findAllByPrivateMessageIsFalse();
-        if(messages.isEmpty())
+        if (messages.isEmpty())
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
         return messages;
     }
@@ -53,10 +53,10 @@ public class GuestController {
             ),
             @ApiResponse(responseCode = "204", description = "No messages found",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = MessageAndUsername.class)))})
+                            array = @ArraySchema(schema = @Schema(implementation = Object.class)))})
     })
     @GetMapping("messages/users/{id}")
-    List<MessageAndUsername> allPublicUserMessages(@PathVariable Long id){
+    List<MessageAndUsername> allPublicUserMessages(@PathVariable Long id) {
         var messages = messageService.findAllByUserIdAndPrivateMessageIsFalse(id);
         if (messages.isEmpty())
             throw new ResponseStatusException(HttpStatus.NO_CONTENT);
