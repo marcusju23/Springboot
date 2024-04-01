@@ -1,6 +1,5 @@
 package se.iths.springbootgroupproject.configurations;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -15,16 +14,19 @@ import se.iths.springbootgroupproject.services.github.GithubOAuth2UserService;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private GithubOAuth2UserService githubOAuth2UserService;
+    private final GithubOAuth2UserService githubOAuth2UserService;
+
+    public SecurityConfig(GithubOAuth2UserService githubOAuth2UserService) {
+        this.githubOAuth2UserService = githubOAuth2UserService;
+    }
 
     @Bean
     SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**").permitAll()
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**").permitAll()
                         .requestMatchers("/web/users/profiles/demo").authenticated()
-                        .anyRequest().authenticated()
+                        .anyRequest().denyAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfoEndpoint ->
