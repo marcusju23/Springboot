@@ -36,7 +36,6 @@ public class GuestController {
                             array = @ArraySchema(schema = @Schema(implementation = Object.class)))})
     })
     @GetMapping("messages")
-    @ResponseStatus(HttpStatus.OK)
     List<MessageAndUsername> all() {
         var messages = messageService.findAllByPrivateMessageIsFalse();
         if (messages.isEmpty())
