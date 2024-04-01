@@ -67,17 +67,9 @@ public class User {
     }
 
     public void setFullName(String fullName) {
-        String[] firstAndLastName = fullName.split(" ");
-        if(firstAndLastName.length >= 2) {
-            firstName = firstAndLastName[0].trim();
-            lastName = firstAndLastName[1].trim();
-        } else if (firstAndLastName.length == 1) {
-            firstName = firstAndLastName[0].trim();
-            lastName = "";
-        } else {
-            firstName = "";
-            lastName = "";
-        }
+        String[] firstAndLastName = fullName.trim().split("\\s");
+        firstName = firstAndLastName.length >= 1 ? firstAndLastName[0].trim() : "";
+        lastName = firstAndLastName.length >= 2 ? firstAndLastName[1].trim() : "";
     }
 
     @Override
