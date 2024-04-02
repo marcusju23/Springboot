@@ -2,6 +2,7 @@ package se.iths.springbootgroupproject.repositories;
 
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
@@ -17,6 +18,9 @@ public interface MessageRepository extends ListCrudRepository<Message, Long>, Li
     List<MessageAndUsername> findAllByPrivateMessageIsFalse();
     List<MessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable);
     Optional<Message> findByTitle(String title);
+
+    @EntityGraph(attributePaths = "user.userName")
+    List<MessageAndUsername> findAllByUserIdAndPrivateMessageIsFalse(Long id);
 
     @Query("""
             update Message m set m.privateMessage = ?1 where m.id = ?2
