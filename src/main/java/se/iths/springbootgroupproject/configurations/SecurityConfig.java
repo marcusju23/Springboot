@@ -25,7 +25,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**").permitAll()
-                        .requestMatchers("/web/users/profiles/demo").authenticated()
+                        .requestMatchers("/web/users/profiles/demo","/web/messages").authenticated()
                         .anyRequest().denyAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
