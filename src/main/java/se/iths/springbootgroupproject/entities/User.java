@@ -17,6 +17,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+    private Integer githubId;
 
     public String getLastName() {
         return lastName;
@@ -64,6 +65,14 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getGithubId() {
+        return githubId;
+    }
+
+    public void setGithubId(Integer githubId) {
+        this.githubId = githubId;
     }
 
     public void setFullName(String fullName) {

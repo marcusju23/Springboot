@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>You are logged in</title>
@@ -40,6 +40,9 @@
             <div id="email-container">
                 <p id="email" th:text="${email}">No email registered on user</p>
             </div>
+            <a th:href="'/web/myprofile/edit'">
+                <button th:text="#{edit}"></button>
+            </a>
         </div>
     </div>
 </div>

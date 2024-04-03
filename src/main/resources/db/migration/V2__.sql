@@ -1,0 +1,8 @@
+ALTER TABLE user
+    ADD github_id BIGINT NULL;
+
+ALTER TABLE user
+    DROP COLUMN image;
+
+ALTER TABLE user
+    ADD image VARCHAR(255) NULL;

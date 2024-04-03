@@ -137,9 +137,9 @@
  */
 
 #profile-container{
-    display: flex;
+    display: block;
     width: 15vw;
-    height: 18vw;
+    height: 25vw;
     margin-left: 10vw ;
     justify-content: space-evenly;
 }

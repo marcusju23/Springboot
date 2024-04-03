@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.web.client.RestClient;
 import se.iths.springbootgroupproject.services.github.GithubOAuth2UserService;
 
@@ -27,7 +25,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**").permitAll()
-                        .requestMatchers("/web/myprofile","/web/messages").authenticated()
+                        .requestMatchers("/web/myprofile","/web/messages","/web/myprofile/edit").authenticated()
                         .anyRequest().denyAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
