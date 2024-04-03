@@ -106,10 +106,26 @@
     margin-left: -25px;
 }
 
-.profile-link a {
+.profile-link a{
     position: fixed;
     top: 10px;
     left: 10px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.logout-link a{
+    position: fixed;
+    top: 13px;
+    left: 50px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.login-link a{
+    position: fixed;
+    top: 13px;
+    left: 15px;
     color: inherit;
     text-decoration: none;
 }

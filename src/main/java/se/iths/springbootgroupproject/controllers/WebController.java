@@ -53,30 +53,20 @@ public class WebController {
         return "messages";
     }
 
-    @GetMapping("/users/profiles/demo")
+    @GetMapping("/myprofile")
     public String userProfile (Model model, @AuthenticationPrincipal OAuth2User principal) {
-        /*
-            This is the endpoint users are pointed to after oauth2 login.
-            The path should probably change name to /users/profiles and access the oauth2User or /users/profiles/{uniqueValue} and fetch
-            uniqueValue from userService.
-         */
 
-        System.out.println("User LoginName " + principal.getAttribute("login"));
+        User user = userRepository.findByUserName(principal.getAttribute("login")).orElseGet(null);
 
-        User user = userRepository.findByUserName(principal.getAttribute("login")).get();
-        System.out.println("USER FIRSTNAME " + user.getFirstName());
-
-        String userName = principal.getAttribute("login");
+/*        String userName = principal.getAttribute("login");
         String profilePic = principal.getAttribute("avatar_url");
-        String name = principal.getAttribute("name");
+        String name = principal.getAttribute("name");*/
 
-        System.out.println(principal.getAttribute("avatar_url").toString());
-        model.addAttribute("name" , name);
-        model.addAttribute("userName", userName);
-        model.addAttribute("profilepic",profilePic);
+        model.addAttribute("name" , user.getFirstName() + " " + user.getLastName());
+        model.addAttribute("userName", user.getUserName());
+        model.addAttribute("profilepic",user.getImage());
+        model.addAttribute("email", user.getEmail());
 
-        //Every attribute you can get from github
-        model.addAttribute("all", principal);
-        return "userprofiledemo";
+        return "userprofile";
     }
 }

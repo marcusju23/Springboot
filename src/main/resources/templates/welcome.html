@@ -6,6 +6,7 @@
         <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
         <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
         <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles.css">
     <script defer src="/static/script.js"></script>
 </head>
@@ -17,7 +18,11 @@
         <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
     </div>
 </div>
-
+<div class="login-link">
+    <a th:href="'/login'">
+        <i class="gg-log-in"></i>
+    </a>
+</div>
 <h1 class="welcome-message" th:text="#{welcome}"></h1>
 <div class="arrows">
     <a class="left" th:if="${currentPage>0}" th:href="'/web/welcome?page=' + ${currentPage - 1}">

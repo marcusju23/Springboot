@@ -7,6 +7,7 @@
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/profile.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-out.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles.css">
     <script defer src="/static/script.js"></script>
 </head>
@@ -21,6 +22,11 @@
 <div class="profile-link">
     <a th:href="'/web/myprofile'">
         <i class="gg-profile"></i>
+    </a>
+</div>
+<div class="logout-link">
+    <a th:href="'/logout'">
+        <i class="gg-log-out"></i>
     </a>
 </div>
 <h1 class="welcome-message" th:text="#{messages.welcome}"></h1>
