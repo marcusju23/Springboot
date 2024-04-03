@@ -12,9 +12,8 @@ public class User {
     private Long id;
     @Column(unique = true)
     private String userName;
-    @Lob
     @Column(name = "image")
-    private Byte[] image;
+    private String image;
     private String firstName;
     private String lastName;
     private String email;
@@ -35,11 +34,11 @@ public class User {
         this.userName = userName;
     }
 
-    public Byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -65,6 +64,12 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setFullName(String fullName) {
+        String[] firstAndLastName = fullName.trim().split("\\s");
+        firstName = firstAndLastName.length >= 1 ? firstAndLastName[0].trim() : "";
+        lastName = firstAndLastName.length >= 2 ? firstAndLastName[1].trim() : "";
     }
 
     @Override
