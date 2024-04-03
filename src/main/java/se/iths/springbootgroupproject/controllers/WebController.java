@@ -54,14 +54,18 @@ public class WebController {
     }
 
     @GetMapping("/myprofile")
-    public String userProfile (Model model, @AuthenticationPrincipal OAuth2User principal) {
-
+    public String userProfile (@RequestParam(value = "page", defaultValue = "0") String page, Model model, @AuthenticationPrincipal OAuth2User principal, HttpServletRequest httpServletRequest) {
+        int p = Integer.parseInt(page);
+        if (p < 0) p = 0;
         User user = userRepository.findByUserName(principal.getAttribute("login")).orElseGet(null);
+        List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user, PageRequest.of(p,10));
+        int allMessageCount = messageService.findAllMessagesByUser(user).size();
 
-/*        String userName = principal.getAttribute("login");
-        String profilePic = principal.getAttribute("avatar_url");
-        String name = principal.getAttribute("name");*/
 
+        model.addAttribute("messages", messages);
+        model.addAttribute("currentPage", p);
+        model.addAttribute("totalMessages", allMessageCount);
+        model.addAttribute("httpServletRequest", httpServletRequest);
         model.addAttribute("name" , user.getFirstName() + " " + user.getLastName());
         model.addAttribute("userName", user.getUserName());
         model.addAttribute("profilepic",user.getImage());

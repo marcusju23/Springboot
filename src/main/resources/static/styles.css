@@ -106,7 +106,7 @@
     margin-left: -25px;
 }
 
-.profile-link a{
+.profile-link a, .messages-link a{
     position: fixed;
     top: 10px;
     left: 10px;
@@ -138,18 +138,28 @@
 
 #profile-container{
     display: flex;
-    width: 80vw;
+    width: 15vw;
+    height: 18vw;
     margin-left: 10vw ;
     justify-content: space-evenly;
 }
 
-#name-container,
 #username-container{
-    font-size: 3vw;
+    font-size: 2.5vw;
+    align-self: center;
 }
 
-#name,
-#login{
+#name-container {
+    font-size: 1.5vw;
+    align-self: center;
+}
+
+#email-container {
+    font-size: 1vw;
+    align-self: center;
+}
+
+#name, #login, #email{
     margin: 0;
 }
 
