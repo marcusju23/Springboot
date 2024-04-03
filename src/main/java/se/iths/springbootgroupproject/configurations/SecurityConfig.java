@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.web.client.RestClient;
 import se.iths.springbootgroupproject.services.github.GithubOAuth2UserService;
 
@@ -32,7 +34,8 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfoEndpoint ->
                                 userInfoEndpoint
                                         .userService(githubOAuth2UserService))
-                        .successHandler(oauth2LoginSuccessHandler()));
+                        .successHandler(oauth2LoginSuccessHandler()))
+                .logout(logout -> logout.logoutSuccessUrl("/web/welcome"));
         return http.build();
     }
 
