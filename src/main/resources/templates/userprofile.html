@@ -5,6 +5,8 @@
     <title>You are logged in</title>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-out.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
     <link href='https://unpkg.com/css.gg@2.0.0/icons/css/comment.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles.css">
     <script defer src="/static/script.js"></script>
@@ -48,19 +50,21 @@
         </div>
     </div>
 </div>
-<div id="new-message">
-    <a th:href="'/web/myprofile/create'">
-        <button th:text="#{newmessage}"></button>
-    </a>
-</div>
-<div class="arrows">
-    <a class="left" th:if="${currentPage>0}" th:href="'/web/myprofile?page=' + ${currentPage - 1}">
-        <i class="gg-arrow-left-r"></i>
-    </a>
-    <a class="right" th:if="${messages.size()==10 && totalMessages -1 > 10}"
-       th:href="'/web/myprofile?page='+${currentPage+1}">
-        <i class="gg-arrow-right-r"></i>
-    </a>
+<div id="new-message-and-arrows-container">
+    <div id="new-message">
+        <a th:href="'/web/myprofile/create'">
+            <button th:text="#{newmessage}"></button>
+        </a>
+    </div>
+    <div class="arrows">
+        <a class="left" th:if="${currentPage>0}" th:href="'/web/myprofile?page=' + ${currentPage - 1}">
+            <i class="gg-arrow-left-r"></i>
+        </a>
+        <a class="right" th:if="${messages.size()==10 && totalMessages -1 > 10}"
+           th:href="'/web/myprofile?page='+${currentPage+1}">
+            <i class="gg-arrow-right-r"></i>
+        </a>
+    </div>
 </div>
 <table class="styled-table">
     <thead>
