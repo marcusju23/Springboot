@@ -99,6 +99,10 @@
     display: flex;
 }
 
+#new-message-and-arrows-container{
+    display: flex;
+}
+
 .right{
     margin-left: 25px;
 }
