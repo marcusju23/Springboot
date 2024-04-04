@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import se.iths.springbootgroupproject.dto.CreateMessageFormData;
 import se.iths.springbootgroupproject.dto.EditUserFormData;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import se.iths.springbootgroupproject.entities.User;
@@ -98,7 +99,23 @@ public class WebController {
         userService.save(user);
         return "redirect:/web/myprofile";
     }
+    @GetMapping("/myprofile/create")
+    public String createMessage(Model model){
+        model.addAttribute("formData", new CreateMessageFormData());
+        return "createmessage";
+    }
 
+    @PostMapping("/myprofile/create")
+    public String createMessage(@Valid @ModelAttribute("formData") CreateMessageFormData messageForm,
+                                BindingResult bindingResult,
+                                @AuthenticationPrincipal OAuth2User principal){
+        if(bindingResult.hasErrors()) {
+            return "createmessage";
+        }
+        User user = userService.findByGitHubId(principal.getAttribute("id"));
+        messageService.save(messageForm.toEntity(user));
+        return "redirect:/web/myprofile";
+    }
 
 
 }

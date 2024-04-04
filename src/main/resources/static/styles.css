@@ -30,8 +30,13 @@
     display: block;
 }
 
+td{
+    overflow-wrap: break-word;
+}
+
 /* Main table styles */
 .styled-table {
+    table-layout: fixed;
     border-collapse: collapse;
     margin: 5px auto;
     font-size: 0.9em;
@@ -99,6 +104,10 @@
     display: flex;
 }
 
+#new-message-and-arrows-container{
+    display: flex;
+}
+
 .right{
     margin-left: 25px;
 }
@@ -130,8 +139,6 @@
     text-decoration: none;
 }
 .edit-button a{
-    position: fixed;
-    margin:auto;
     color: inherit;
     text-decoration: none;
 }
@@ -142,6 +149,11 @@
     height: 25vw;
     margin-left: 10vw ;
     justify-content: space-evenly;
+}
+
+#new-message{
+    position: relative;
+    left: 10vw;
 }
 
 #username-container{
@@ -166,7 +178,6 @@
 img{
     display: block;
     max-width: 100%;
-    height: 240px;
     object-fit: contain;
     border-radius: 50%;
     margin: auto;
@@ -174,6 +185,7 @@ img{
 
 #user-information{
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
 }
