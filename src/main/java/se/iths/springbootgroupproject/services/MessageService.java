@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
+import se.iths.springbootgroupproject.entities.Message;
 import se.iths.springbootgroupproject.entities.User;
 import se.iths.springbootgroupproject.repositories.MessageRepository;
 
@@ -75,5 +76,10 @@ public class MessageService {
     @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void editTitle(String updatedTitle, Long id) {
         messageRepository.editTitle(updatedTitle, id);
+    }
+
+    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
+    public void save(Message message) {
+        messageRepository.save(message);
     }
 }
