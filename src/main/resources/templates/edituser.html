@@ -23,6 +23,10 @@
         <input id="email" type="email" th:field="*{email}"/>
     <p th:if="${#fields.hasErrors('email')}"
        th:text="${#strings.listJoin(#fields.errors('email'), ', ')}"></p>
+    <p><label for="image" th:text="#{image} + ':'"/>
+        <input id="image" type="url" th:field="*{image}"/>
+    <p th:if="${#fields.hasErrors('image')}"
+       th:text="${#strings.listJoin(#fields.errors('image'), ', ')}"></p>
     <p><input type="submit" th:value="#{submit}"/> <input type="reset" th:value="#{reset}"/> <input type="button" th:value="#{back}" onclick="history.back()"/></p>
 </form>
 </body>

@@ -131,6 +131,7 @@
 }
 .edit-button a{
     position: fixed;
+    margin:auto;
     color: inherit;
     text-decoration: none;
 }
@@ -164,9 +165,11 @@
 
 img{
     display: block;
-    width: 100%;
+    max-width: 100%;
+    height: 240px;
     object-fit: contain;
     border-radius: 50%;
+    margin: auto;
 }
 
 #user-information{

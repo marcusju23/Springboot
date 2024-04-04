@@ -78,7 +78,7 @@ public class WebController {
     @GetMapping("/myprofile/edit")
     public String editUserProfile(Model model, @AuthenticationPrincipal OAuth2User principal){
         User user = userService.findByGitHubId(principal.getAttribute("id"));
-        model.addAttribute("formData", new EditUserFormData(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail()));
+        model.addAttribute("formData", new EditUserFormData(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getImage()));
         return "edituser";
     }
 
@@ -94,6 +94,7 @@ public class WebController {
         user.setFirstName(userForm.getFirstName());
         user.setLastName(userForm.getLastName());
         user.setEmail(userForm.getEmail());
+        user.setImage(userForm.getImage());
         userService.save(user);
         return "redirect:/web/myprofile";
     }
