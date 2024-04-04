@@ -23,7 +23,7 @@ public class CreateMessageFormData {
     private String title;
     @NotBlank
     @NotNull
-    @Size(min = 1, message = "Do not leave empty")
+    @Size(min = 1, max = 255, message = "Must contain between 1 and 255 chars")
     private String messageBody;
     @NotNull(message = "Set message to public or private")
     private boolean privateMessage;
