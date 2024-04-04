@@ -20,7 +20,7 @@
     <p th:if="${#fields.hasErrors('lastName')}"
        th:text="${#strings.listJoin(#fields.errors('lastName'), ', ')}"></p>
     <p><label for="email" th:text="#{email} + ':'"/>
-        <input id="email" type="text" th:field="*{email}"/>
+        <input id="email" type="email" th:field="*{email}"/>
     <p th:if="${#fields.hasErrors('email')}"
        th:text="${#strings.listJoin(#fields.errors('email'), ', ')}"></p>
     <p><input type="submit" th:value="#{submit}"/> <input type="reset" th:value="#{reset}"/> <input type="button" th:value="#{back}" onclick="history.back()"/></p>
