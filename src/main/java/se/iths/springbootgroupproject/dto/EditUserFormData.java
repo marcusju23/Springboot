@@ -3,6 +3,7 @@ package se.iths.springbootgroupproject.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.URL;
 import se.iths.springbootgroupproject.entities.User;
 
 public class EditUserFormData {
@@ -17,15 +18,26 @@ public class EditUserFormData {
     private String lastName;
     @Email(message = "PLEASEEE provide a valid email adress u ass")
     private String email;
+    @URL
+    private String image;
 
     public EditUserFormData() {
     }
     
-    public EditUserFormData(String userName, String firstName, String lastName, String email) {
+    public EditUserFormData(String userName, String firstName, String lastName, String email, String image) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getUserName() {
@@ -66,6 +78,7 @@ public class EditUserFormData {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setEmail(email);
+        user.setImage(image);
         return user;
     }
 
