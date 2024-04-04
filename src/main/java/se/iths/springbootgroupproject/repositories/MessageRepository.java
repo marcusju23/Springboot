@@ -9,6 +9,7 @@ import org.springframework.data.repository.ListCrudRepository;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import org.springframework.data.repository.ListPagingAndSortingRepository;
 import se.iths.springbootgroupproject.entities.Message;
+import se.iths.springbootgroupproject.entities.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,8 @@ public interface MessageRepository extends ListCrudRepository<Message, Long>, Li
 
     List<MessageAndUsername> findAllByPrivateMessageIsFalse();
     List<MessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable);
+    List<MessageAndUsername> findAllByUser(User user);
+    List<MessageAndUsername> findAllByUser(User user, Pageable pageable);
     Optional<Message> findByTitle(String title);
 
     @EntityGraph(attributePaths = "user.userName")

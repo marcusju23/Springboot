@@ -106,7 +106,7 @@
     margin-left: -25px;
 }
 
-.profile-link a {
+.profile-link a, .messages-link a{
     position: fixed;
     top: 10px;
     left: 10px;
@@ -114,26 +114,51 @@
     text-decoration: none;
 }
 
+.logout-link a{
+    position: fixed;
+    top: 13px;
+    left: 50px;
+    color: inherit;
+    text-decoration: none;
+}
 
-/*--------------------------------------------------------------------*/
-/*
-    Following css is used in userprofiledemo as a demo.
- */
+.login-link a{
+    position: fixed;
+    top: 13px;
+    left: 15px;
+    color: inherit;
+    text-decoration: none;
+}
+.edit-button a{
+    position: fixed;
+    color: inherit;
+    text-decoration: none;
+}
 
 #profile-container{
-    display: flex;
-    width: 80vw;
+    display: block;
+    width: 15vw;
+    height: 25vw;
     margin-left: 10vw ;
     justify-content: space-evenly;
 }
 
-#name-container,
 #username-container{
-    font-size: 3vw;
+    font-size: 2.5vw;
+    align-self: center;
 }
 
-#name,
-#login{
+#name-container {
+    font-size: 1.5vw;
+    align-self: center;
+}
+
+#email-container {
+    font-size: 1vw;
+    align-self: center;
+}
+
+#name, #login, #email{
     margin: 0;
 }
 

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
+import se.iths.springbootgroupproject.entities.User;
 import se.iths.springbootgroupproject.repositories.MessageRepository;
 
 import java.util.List;
@@ -51,6 +52,14 @@ public class MessageService {
                         message.getMessageBody(),
                         message.getUser().getUserName()))
                 .toList();
+    }
+
+    public List<MessageAndUsername> findAllMessagesByUser(User user, Pageable pageable) {
+        return messageRepository.findAllByUser(user, pageable);
+    }
+
+    public List<MessageAndUsername> findAllMessagesByUser(User user){
+        return messageRepository.findAllByUser(user);
     }
 
     @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)

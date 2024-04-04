@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to GilGang website</title>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>You are logged in</title>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-out.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/comment.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
     <script defer src="/static/script.js"></script>
 </head>
 <body>
@@ -18,17 +17,42 @@
         <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
     </div>
 </div>
-<div class="login-link">
-    <a th:href="'/login'">
-        <i class="gg-log-in"></i>
+<div class="logout-link">
+    <a th:href="'/logout'">
+        <i class="gg-log-out"></i>
     </a>
 </div>
-<h1 class="welcome-message" th:text="#{welcome}"></h1>
+<div class="messages-link">
+    <a th:href="'/web/messages'">
+        <i class="gg-comment"></i>
+    </a>
+</div>
+<div id="profile-container">
+    <div id="img-container">
+        <img id="profile" th:src="${profilepic}" alt="No image found :/"/>
+        <div id="user-information">
+            <div id="username-container">
+                <p id="login" th:text="${userName}">default</p>
+            </div>
+            <div id="name-container">
+                <p id="name" th:text="${name}"></p>
+            </div>
+            <div id="email-container">
+                <p id="email" th:text="${email}">No email registered on user</p>
+            </div>
+            <div class="edit-button">
+            <a th:href="'/web/myprofile/edit'">
+                <button th:text="#{edit}"></button>
+            </a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="arrows">
     <a class="left" th:if="${currentPage>0}" th:href="'/web/welcome?page=' + ${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/welcome?page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size()==10 && totalMessages -1 > 10}" th:href="'/web/welcome?page='+${currentPage+1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>
@@ -50,6 +74,5 @@
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>

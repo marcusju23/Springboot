@@ -36,6 +36,10 @@ public class UserService {
         return userRepository.findByUserName(userName).orElse(null);
     }
 
+    public User findByGitHubId(Integer githubId){
+        return userRepository.findByGithubId(githubId).orElse(null);
+    }
+
     @Cacheable("email")
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -44,6 +48,11 @@ public class UserService {
     @CacheEvict(value = {"email", "username"}, allEntries = true)
     public void updateEmail(String email, Long id) {
         userRepository.updateEmail(email, id);
+    }
+
+    @CacheEvict(value = {"email", "username"}, allEntries = true)
+    public void save(User user) {
+        userRepository.save(user);
     }
 
 }

@@ -25,14 +25,15 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**").permitAll()
-                        .requestMatchers("/web/users/profiles/demo","/web/messages").authenticated()
+                        .requestMatchers("/web/myprofile","/web/messages","/web/myprofile/edit").authenticated()
                         .anyRequest().denyAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfoEndpoint ->
                                 userInfoEndpoint
                                         .userService(githubOAuth2UserService))
-                        .successHandler(oauth2LoginSuccessHandler()));
+                        .successHandler(oauth2LoginSuccessHandler()))
+                .logout(logout -> logout.logoutSuccessUrl("/web/welcome"));
         return http.build();
     }
 
@@ -46,7 +47,7 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationSuccessHandler oauth2LoginSuccessHandler() {
-        return new SimpleUrlAuthenticationSuccessHandler("/web/users/profiles/demo");
+        return new SimpleUrlAuthenticationSuccessHandler("/web/myprofile");
     }
 
     @Bean

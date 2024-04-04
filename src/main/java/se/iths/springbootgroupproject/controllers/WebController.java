@@ -1,18 +1,19 @@
 package se.iths.springbootgroupproject.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import se.iths.springbootgroupproject.dto.EditUserFormData;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import se.iths.springbootgroupproject.entities.User;
-import se.iths.springbootgroupproject.repositories.UserRepository;
 import se.iths.springbootgroupproject.services.MessageService;
+import se.iths.springbootgroupproject.services.UserService;
 
 import java.util.List;
 
@@ -21,11 +22,11 @@ import java.util.List;
 public class WebController {
 
     private final MessageService messageService;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public WebController(MessageService messageService,UserRepository userRepository) {
+    public WebController(MessageService messageService,UserService userService) {
         this.messageService = messageService;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/welcome")
@@ -53,30 +54,50 @@ public class WebController {
         return "messages";
     }
 
-    @GetMapping("/users/profiles/demo")
-    public String userProfile (Model model, @AuthenticationPrincipal OAuth2User principal) {
-        /*
-            This is the endpoint users are pointed to after oauth2 login.
-            The path should probably change name to /users/profiles and access the oauth2User or /users/profiles/{uniqueValue} and fetch
-            uniqueValue from userService.
-         */
+    @GetMapping("/myprofile")
+    public String userProfile (@RequestParam(value = "page", defaultValue = "0") String page, Model model, @AuthenticationPrincipal OAuth2User principal, HttpServletRequest httpServletRequest) {
+        int p = Integer.parseInt(page);
+        if (p < 0) p = 0;
+        User user = userService.findByGitHubId(principal.getAttribute("id"));
+        List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user, PageRequest.of(p,10));
+        int allMessageCount = messageService.findAllMessagesByUser(user).size();
 
-        System.out.println("User LoginName " + principal.getAttribute("login"));
 
-        User user = userRepository.findByUserName(principal.getAttribute("login")).get();
-        System.out.println("USER FIRSTNAME " + user.getFirstName());
+        model.addAttribute("messages", messages);
+        model.addAttribute("currentPage", p);
+        model.addAttribute("totalMessages", allMessageCount);
+        model.addAttribute("httpServletRequest", httpServletRequest);
+        model.addAttribute("name" , user.getFirstName() + " " + user.getLastName());
+        model.addAttribute("userName", user.getUserName());
+        model.addAttribute("profilepic",user.getImage());
+        model.addAttribute("email", user.getEmail());
 
-        String userName = principal.getAttribute("login");
-        String profilePic = principal.getAttribute("avatar_url");
-        String name = principal.getAttribute("name");
-
-        System.out.println(principal.getAttribute("avatar_url").toString());
-        model.addAttribute("name" , name);
-        model.addAttribute("userName", userName);
-        model.addAttribute("profilepic",profilePic);
-
-        //Every attribute you can get from github
-        model.addAttribute("all", principal);
-        return "userprofiledemo";
+        return "userprofile";
     }
+
+    @GetMapping("/myprofile/edit")
+    public String editUserProfile(Model model, @AuthenticationPrincipal OAuth2User principal){
+        User user = userService.findByGitHubId(principal.getAttribute("id"));
+        model.addAttribute("formData", new EditUserFormData(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail()));
+        return "edituser";
+    }
+
+    @PostMapping("/myprofile/edit")
+    public String editUserProfile(@Valid @ModelAttribute("formData") EditUserFormData userForm,
+                    BindingResult bindingResult,
+                    @AuthenticationPrincipal OAuth2User principal) {
+        if(bindingResult.hasErrors()) {
+            return "edituser";
+        }
+        User user = userService.findByGitHubId(principal.getAttribute("id"));
+        user.setUserName(userForm.getUserName());
+        user.setFirstName(userForm.getFirstName());
+        user.setLastName(userForm.getLastName());
+        user.setEmail(userForm.getEmail());
+        userService.save(user);
+        return "redirect:/web/myprofile";
+    }
+
+
+
 }
