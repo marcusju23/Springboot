@@ -18,6 +18,8 @@ import se.iths.springbootgroupproject.entities.User;
 public class CreateMessageFormData {
 
     @NotNull
+    private Long id;
+    @NotNull
     @NotBlank
     @Size(min = 1, max = 100, message = "Title must be between 1 and 100 chars")
     private String title;
