@@ -15,14 +15,13 @@ public class Message {
 
     @CreatedDate
     private LocalDate date;
-
+    private LocalDate lastChanged;
     private String title;
     private String messageBody;
     private boolean privateMessage;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-
     public User getUser() {
         return user;
     }
@@ -69,6 +68,14 @@ public class Message {
 
     public void setPrivateMessage(boolean privateMessage) {
         this.privateMessage = privateMessage;
+    }
+
+    public LocalDate getLastChanged() {
+        return lastChanged;
+    }
+
+    public void setLastChanged(LocalDate lastChanged) {
+        this.lastChanged = lastChanged;
     }
 
 }
