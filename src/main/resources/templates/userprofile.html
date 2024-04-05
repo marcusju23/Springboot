@@ -74,6 +74,7 @@
         <th th:text="#{body}"></th>
         <th class="author-cell-header" th:text="#{author}"></th>
         <th class="date-cell-header" th:text="#{date}"></th>
+        <th class="edit-cell-header" th:text="#{lastedit}"></th>
     </tr>
     </thead>
     <tbody>
@@ -87,6 +88,12 @@
         <td th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
         <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
         <td class="date-cell" th:text="${message.date()}">2024-02-27</td>
+        <td>
+            <p th:text="${message.lastChanged()}">
+            </p>
+            <p th:if="${message.lastChanged() != null}" th:text="#{editedby}+ ':' +${message.userUserName()}">
+            </p>
+        </td>
     </tr>
     </tbody>
 </table>
