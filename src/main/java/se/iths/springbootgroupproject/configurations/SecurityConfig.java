@@ -24,7 +24,7 @@ public class SecurityConfig {
     SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**").permitAll()
+                        .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**","/api/**").permitAll()
                         .requestMatchers("/web/myprofile","/web/myprofile/editmessage*","/web/myprofile/create","/web/messages","/web/myprofile/edit").authenticated()
                         .anyRequest().denyAll()
                 )
