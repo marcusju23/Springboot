@@ -94,7 +94,7 @@ public class WebController {
 
         User user = userService.findByGitHubId(principal.getAttribute("id"));
         if (checkIfUsernameAlreadyExists(userForm.getUserName(),user)) {
-            bindingResult.rejectValue("userName","duplicate", "Not a unique username");
+            bindingResult.rejectValue("userName","duplicate", "Username needs to be unique");
         }
         if(bindingResult.hasErrors()) {
             return "edituser";
