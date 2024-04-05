@@ -45,6 +45,7 @@ public class MessageService {
                 .map(message -> new MessageAndUsername(
                         message.getId(),
                         message.getDate(),
+                        message.getLastChanged(),
                         message.getTitle(),
                         message.getMessageBody(),
                         message.getUser().getUserName()))
@@ -57,6 +58,7 @@ public class MessageService {
                 .map(message -> new MessageAndUsername(
                         message.getId(),
                         message.getDate(),
+                        message.getLastChanged(),
                         message.getTitle(),
                         message.getMessageBody(),
                         message.getUser().getUserName()))

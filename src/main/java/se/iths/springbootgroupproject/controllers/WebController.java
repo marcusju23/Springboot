@@ -18,6 +18,7 @@ import se.iths.springbootgroupproject.entities.User;
 import se.iths.springbootgroupproject.services.MessageService;
 import se.iths.springbootgroupproject.services.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -115,7 +116,6 @@ public class WebController {
     public String editMessage(Model model, @RequestParam("id") Long id) {
         Message message = messageService.findById(id);
         model.addAttribute("formData", new CreateMessageFormData(
-                message.getId(),
                 message.getTitle(),
                 message.getMessageBody(),
                 message.isPrivateMessage()));
@@ -136,6 +136,7 @@ public class WebController {
         message.setMessageBody(messageForm.getMessageBody());
         message.setTitle(messageForm.getTitle());
         message.setPrivateMessage(messageForm.isPrivateMessage());
+        message.setLastChanged(LocalDate.now());
         messageService.save(message);
         return "redirect:/web/myprofile";
     }
