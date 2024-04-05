@@ -69,6 +69,7 @@
 <table class="styled-table">
     <thead>
     <tr>
+        <th class="edit-cell-header" th:text="#{edit}"></th>
         <th th:text="#{title}"></th>
         <th th:text="#{body}"></th>
         <th class="author-cell-header" th:text="#{author}"></th>
@@ -76,7 +77,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="message : ${messages}">
+    <tr th:each="message : ${messages}"  >
+        <td id="edit-button">
+            <a th:href="'/web/myprofile/editmessage?id=' +${message.id}">
+            <button class="editBtn" th:text="#{edit}" >Edit</button>
+            </a>
+        </td>
         <td th:text="${message.title()}">Important Announcement</td>
         <td th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
         <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
