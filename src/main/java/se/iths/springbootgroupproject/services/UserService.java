@@ -8,6 +8,7 @@ import se.iths.springbootgroupproject.entities.User;
 import se.iths.springbootgroupproject.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,8 +33,8 @@ public class UserService {
     }
 
     @Cacheable("username")
-    public User findByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElse(null);
+    public Optional<User> findByUserName(String userName) {
+        return userRepository.findByUserName(userName);
     }
 
     public User findByGitHubId(Integer githubId){

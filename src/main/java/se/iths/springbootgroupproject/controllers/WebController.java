@@ -83,14 +83,22 @@ public class WebController {
         return "edituser";
     }
 
+    private boolean checkIfUsernameAlreadyExists(String userName, User user) {
+        return userService.findByUserName(userName).isPresent() && !userName.equals(user.getUserName());
+    }
+
     @PostMapping("/myprofile/edit")
     public String editUserProfile(@Valid @ModelAttribute("formData") EditUserFormData userForm,
                     BindingResult bindingResult,
                     @AuthenticationPrincipal OAuth2User principal) {
+
+        User user = userService.findByGitHubId(principal.getAttribute("id"));
+        if (checkIfUsernameAlreadyExists(userForm.getUserName(),user)) {
+            bindingResult.rejectValue("userName","duplicate", "Username needs to be unique");
+        }
         if(bindingResult.hasErrors()) {
             return "edituser";
         }
-        User user = userService.findByGitHubId(principal.getAttribute("id"));
         user.setUserName(userForm.getUserName());
         user.setFirstName(userForm.getFirstName());
         user.setLastName(userForm.getLastName());
@@ -99,6 +107,7 @@ public class WebController {
         userService.save(user);
         return "redirect:/web/myprofile";
     }
+
     @GetMapping("/myprofile/create")
     public String createMessage(Model model){
         model.addAttribute("formData", new CreateMessageFormData());
