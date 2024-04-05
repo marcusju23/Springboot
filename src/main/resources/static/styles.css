@@ -74,15 +74,24 @@ td{
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #ff0099;
 }
-.date-cell-header {
-    width: 4vw;
-}
 
+.date-cell-header,
 .date-cell{
     width: 4vw;
 }
 
-.author-cell-header{
+
+.edit-cell-header{
+    width: 7vw;
+}
+
+#edit-button{
+    text-align: center;
+    width: 3vw;
+}
+
+.author-cell-header,
+#edit-header{
     width: 10vw;
 }
 

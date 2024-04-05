@@ -69,18 +69,31 @@
 <table class="styled-table">
     <thead>
     <tr>
+        <th class="edit-cell-header" th:text="#{edit}"></th>
         <th th:text="#{title}"></th>
         <th th:text="#{body}"></th>
         <th class="author-cell-header" th:text="#{author}"></th>
         <th class="date-cell-header" th:text="#{date}"></th>
+        <th class="edit-cell-header" th:text="#{lastedit}"></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="message : ${messages}">
+    <tr th:each="message : ${messages}"  >
+        <td id="edit-button">
+            <a th:href="'/web/myprofile/editmessage?id=' +${message.id}">
+            <button class="editBtn" th:text="#{edit}" >Edit</button>
+            </a>
+        </td>
         <td th:text="${message.title()}">Important Announcement</td>
         <td th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
         <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
         <td class="date-cell" th:text="${message.date()}">2024-02-27</td>
+        <td>
+            <p th:text="${message.lastChanged()}">
+            </p>
+            <p th:if="${message.lastChanged() != null}" th:text="#{editedby}+ ':' +${message.userUserName()}">
+            </p>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -1,5 +1,6 @@
 package se.iths.springbootgroupproject.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +12,7 @@ import se.iths.springbootgroupproject.entities.User;
 import se.iths.springbootgroupproject.repositories.MessageRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,29 +28,37 @@ public class MessageService {
     public List<MessageAndUsername> findAllByPrivateMessageIsFalse() {
         return messageRepository.findAllByPrivateMessageIsFalse();
     }
+
     @Cacheable("publicMessages")
-    public List<MessageAndUsername> findAllByUserIdAndPrivateMessageIsFalse(Long id){
+    public List<MessageAndUsername> findAllByUserIdAndPrivateMessageIsFalse(Long id) {
         return messageRepository.findAllByUserIdAndPrivateMessageIsFalse(id);
     }
+
     @Cacheable("publicMessages")
-    public List<MessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable){
+    public List<MessageAndUsername> findAllByPrivateMessageIsFalse(Pageable pageable) {
         return messageRepository.findAllByPrivateMessageIsFalse(pageable);
     }
+
     @Cacheable("messages")
     public List<MessageAndUsername> findAllMessages(Pageable pageable) {
         return messageRepository.findAll(pageable).getContent().stream()
                 .map(message -> new MessageAndUsername(
+                        message.getId(),
                         message.getDate(),
+                        message.getLastChanged(),
                         message.getTitle(),
                         message.getMessageBody(),
                         message.getUser().getUserName()))
                 .toList();
     }
+
     @Cacheable("messages")
     public List<MessageAndUsername> findAllMessages() {
         return messageRepository.findAll().stream()
                 .map(message -> new MessageAndUsername(
+                        message.getId(),
                         message.getDate(),
+                        message.getLastChanged(),
                         message.getTitle(),
                         message.getMessageBody(),
                         message.getUser().getUserName()))
@@ -59,27 +69,19 @@ public class MessageService {
         return messageRepository.findAllByUser(user, pageable);
     }
 
-    public List<MessageAndUsername> findAllMessagesByUser(User user){
+    public List<MessageAndUsername> findAllMessagesByUser(User user) {
         return messageRepository.findAllByUser(user);
     }
-
-    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
-    public void setMessagePrivacy(boolean isPrivate, Long id) {
-        messageRepository.setMessagePrivacy(isPrivate, id);
-    }
-
-    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
-    public void editMessage(String updatedBody, Long id) {
-        messageRepository.editMessage(updatedBody, id);
-    }
-
-    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
-    public void editTitle(String updatedTitle, Long id) {
-        messageRepository.editTitle(updatedTitle, id);
-    }
-
     @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void save(Message message) {
         messageRepository.save(message);
+    }
+
+    @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
+    public Message findById(Long id) {
+        Optional<Message> message = messageRepository.findById(id);
+        if (message.isPresent())
+            return message.get();
+        throw new EntityNotFoundException();
     }
 }
