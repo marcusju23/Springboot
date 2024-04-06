@@ -15,6 +15,7 @@ import se.iths.springbootgroupproject.dto.EditUserFormData;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import se.iths.springbootgroupproject.entities.Message;
 import se.iths.springbootgroupproject.entities.User;
+import se.iths.springbootgroupproject.services.LibreTranslateService;
 import se.iths.springbootgroupproject.services.MessageService;
 import se.iths.springbootgroupproject.services.UserService;
 
@@ -27,10 +28,12 @@ public class WebController {
 
     private final MessageService messageService;
     private final UserService userService;
+    private final LibreTranslateService libreTranslateService;
 
-    public WebController(MessageService messageService, UserService userService) {
+    public WebController(MessageService messageService, UserService userService, LibreTranslateService libreTranslateService) {
         this.messageService = messageService;
         this.userService = userService;
+        this.libreTranslateService = libreTranslateService;
     }
 
     @GetMapping("/welcome")
@@ -159,5 +162,16 @@ public class WebController {
         return "redirect:/web/myprofile";
     }
 
+    @GetMapping("/messages/translate")
+    public String translateMessage(Model model, @RequestParam("id") Long id) {
+        Message message = messageService.findById(id);
+        String translatedMessage = libreTranslateService.translateMessage(message.getMessageBody());
+        model.addAttribute("title", message.getTitle());
+        model.addAttribute("message", translatedMessage);
+        model.addAttribute("userName",message.getUser().getUserName());
+        model.addAttribute("date", message.getDate());
+        model.addAttribute("lastChanged",message.getLastChanged());
+        return "translatemessage";
+    }
 
 }
