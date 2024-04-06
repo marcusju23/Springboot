@@ -35,7 +35,7 @@ class MessageRepositoryTest {
         assertThat(entityManager.find(Message.class,insertedMessage.getId())).isEqualTo(message);
     }
     @Test
-    @DisplayName("Updating a user")
+    @DisplayName("Updating a message")
     void updatingAUser(){
         var message = new Message();
         message.setTitle("TEST-TITLE");
