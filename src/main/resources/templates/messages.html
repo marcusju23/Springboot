@@ -51,10 +51,10 @@
     <tbody>
     <tr th:each="message : ${messages}">
         <td th:text="${message.title()}">Important Announcement</td>
-        <td>
+        <td class="messageContainer">
             <span th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
             <a th:href="'/web/messages/translate?id=' +${message.id()}">
-            <button class="translateBtn" th:text="#{translate}">translate</button>
+            <h5 class="translateBtn" th:text="#{translate}">translate</h5>
             </a>
         </td>
         <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>

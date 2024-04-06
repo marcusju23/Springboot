@@ -165,8 +165,9 @@ public class WebController {
     @GetMapping("/messages/translate")
     public String translateMessage(Model model, @RequestParam("id") Long id) {
         Message message = messageService.findById(id);
+        String translatedTitle = libreTranslateService.translateMessage(message.getTitle());
         String translatedMessage = libreTranslateService.translateMessage(message.getMessageBody());
-        model.addAttribute("title", message.getTitle());
+        model.addAttribute("title", translatedTitle);
         model.addAttribute("message", translatedMessage);
         model.addAttribute("userName",message.getUser().getUserName());
         model.addAttribute("date", message.getDate());

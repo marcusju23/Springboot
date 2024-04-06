@@ -17,28 +17,28 @@ public class LibreTranslateService {
     }
 
     @Retryable
-    public boolean detectMessageLanguage(String message) {
+    public boolean detectMessageLanguage(String text) {
         String isEnOrSv = Objects.requireNonNull(restClient.post()
                 .uri("http://localhost:5000/detect")
                 .contentType(APPLICATION_JSON)
                 .accept()
-                .body(String.format("{\"q\":\"%s\"}", message))
+                .body(String.format("{\"q\":\"%s\"}", text))
                 .retrieve()
                 .body(String.class));
         return !isEnOrSv.contains("\"en\"");
     }
 
     @Retryable
-    public String translateMessage(String message) {
+    public String translateMessage(String text) {
         String sourceLanguage = "en";
         String targetLanguage = "sv";
 
-        if(detectMessageLanguage(message)) {
+        if(detectMessageLanguage(text)) {
             sourceLanguage = "sv";
             targetLanguage = "en";
         }
 
-        String jsonString = String.format("{\"q\":\"%s\",\"source\":\"%s\",\"target\":\"%s\"}", message, sourceLanguage, targetLanguage);
+        String jsonString = String.format("{\"q\":\"%s\",\"source\":\"%s\",\"target\":\"%s\"}", text, sourceLanguage, targetLanguage);
 
         return Objects.requireNonNull(restClient.post()
                         .uri("http://localhost:5000/translate")
