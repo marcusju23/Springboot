@@ -14,7 +14,7 @@ public interface UserRepository extends ListCrudRepository<User, Long> {
     List<User> findByLastName(String lastName);
     Optional<User> findByUserName(String userName);
     Optional<User> findByGithubId(Integer githubId);
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     @Query("""
             update User u set u.email = ?1 where u.id = ?2
