@@ -157,8 +157,12 @@ class WebControllerTest {
         message.setId(1L);
         message.setTitle("Title");
         message.setMessageBody("My message body");
+        User user = new User();
+        user.setId(1L);
+        message.setUser(user);
+        when(userService.findByGitHubId(any())).thenReturn(user);
         when(messageService.findById(any())).thenReturn(message);
-        mockMvc.perform(get("/web/myprofile/editmessage")
+        mockMvc.perform(get("/web/myprofile/editmessage").with(oauth2Login())
                         .param("id", message.getId().toString()))
                 .andExpectAll(
                         status().isOk(),
