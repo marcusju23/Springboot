@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import se.iths.springbootgroupproject.entities.User;
 import se.iths.springbootgroupproject.services.MessageService;
-import se.iths.springbootgroupproject.services.github.GithubOAuth2UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,8 +33,6 @@ class GuestControllerTest {
     @MockBean
     MessageService messageService;
 
-    @MockBean
-    private GithubOAuth2UserService githubOAuth2UserService;
 
     private MessageAndUsername message1;
     private MessageAndUsername message2;
