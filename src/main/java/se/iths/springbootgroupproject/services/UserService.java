@@ -43,7 +43,7 @@ public class UserService {
 
     @Cacheable("email")
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email).orElse(null);
     }
 
     @CacheEvict(value = {"email", "username"}, allEntries = true)
