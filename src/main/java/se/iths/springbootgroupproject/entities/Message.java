@@ -1,11 +1,17 @@
 package se.iths.springbootgroupproject.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Message {
@@ -22,60 +28,20 @@ public class Message {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
-    public User getUser() {
-        return user;
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
+        Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
+        if (thisEffectiveClass != oEffectiveClass) return false;
+        Message message = (Message) o;
+        return getId() != null && Objects.equals(getId(), message.getId());
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public final int hashCode() {
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getMessageBody() {
-        return messageBody;
-    }
-
-    public void setMessageBody(String messageBody) {
-        this.messageBody = messageBody;
-    }
-
-    public boolean isPrivateMessage() {
-        return privateMessage;
-    }
-
-    public void setPrivateMessage(boolean privateMessage) {
-        this.privateMessage = privateMessage;
-    }
-
-    public LocalDate getLastChanged() {
-        return lastChanged;
-    }
-
-    public void setLastChanged(LocalDate lastChanged) {
-        this.lastChanged = lastChanged;
-    }
-
 }
