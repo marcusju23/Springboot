@@ -100,11 +100,21 @@ class WebControllerTest {
     @Test
     void authenticatedUserAccessTheirProfile() throws Exception {
         User user = new User();
-        user.setFirstName("Adam");
+        user.setFirstName("Pelle");
+        user.setEmail("Pelle@gmail.com");
+        user.setUserName("Pelle2k");
+        user.setLastName("Pellsson");
+        user.setImage("/img.jpg");
         when(userService.findByGitHubId(any())).thenReturn(user);
         mockMvc.perform(MockMvcRequestBuilders.get("/web/myprofile")
                         .with(oauth2Login()))
-                .andExpect(status().isOk());
+                .andExpectAll(
+                        model().attribute("name", user.getFirstName()+" "+user.getLastName()),
+                        model().attribute("email", user.getEmail()),
+                        model().attribute("userName", user.getUserName()),
+                        model().attribute("profilepic", user.getImage()),
+                        status().isOk(),
+                        view().name("userprofile"));
     }
 
     @Test
@@ -150,7 +160,8 @@ class WebControllerTest {
         when(messageService.findById(any())).thenReturn(message);
         mockMvc.perform(get("/web/myprofile/editmessage")
                         .param("id", message.getId().toString()))
-                .andExpectAll(status().isOk(),
+                .andExpectAll(
+                        status().isOk(),
                         view().name("editmessage"),
                         result -> {
                             String content = result.getResponse().getContentAsString();
@@ -194,9 +205,10 @@ class WebControllerTest {
 
     @Test
     void shouldRedirectToMyprofile() throws Exception {
-        when(messageService.findById(1L)).thenReturn(new Message());
+        Long id = 1L;
+        when(messageService.findById(id)).thenReturn(new Message());
         mockMvc.perform(post("/web/myprofile/editmessage").with(csrf())
-                        .param("id", String.valueOf(1))
+                        .param("id", String.valueOf(id))
                         .param("title", "My title")
                         .param("messageBody", "My message")
                         .param("privateMessage", "false")
