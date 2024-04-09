@@ -1,10 +1,14 @@
 package se.iths.springbootgroupproject.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
 
+@Setter
+@Getter
 @Entity
 public class User {
     @Id
@@ -18,62 +22,6 @@ public class User {
     private String lastName;
     private String email;
     private Integer githubId;
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getGithubId() {
-        return githubId;
-    }
-
-    public void setGithubId(Integer githubId) {
-        this.githubId = githubId;
-    }
 
     public void setFullName(String fullName) {
         String[] firstAndLastName = fullName.trim().split("\\s");

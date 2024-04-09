@@ -46,37 +46,4 @@ class CreateMessageFormDataTest {
         assertEquals(formData.isPrivateMessage(), message.isPrivateMessage());
         assertEquals(user, message.getUser());
     }
-
-    @Test
-    @DisplayName("Getters and setters")
-    void getterAndSetter() {
-        CreateMessageFormData formData = new CreateMessageFormData();
-        formData.setTitle("Best title");
-        formData.setMessageBody("Something something yes");
-        formData.setPrivateMessage(true);
-
-        assertEquals("Best title", formData.getTitle());
-        assertEquals("Something something yes", formData.getMessageBody());
-        assertTrue(formData.isPrivateMessage());
-    }
-
-    @Test
-    @DisplayName("No arguments constructor")
-    void noArgsConstructor() {
-        CreateMessageFormData formData = new CreateMessageFormData();
-
-        assertNotNull(formData);
-    }
-
-    @Test
-    @DisplayName("All arguments constructor")
-    void allArgsConstructor() {
-        CreateMessageFormData formData = new CreateMessageFormData("Title",
-                "Body", true);
-
-        assertEquals("Title", formData.getTitle());
-        assertEquals("Body", formData.getMessageBody());
-        assertTrue(formData.isPrivateMessage());
-    }
-
 }

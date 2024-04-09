@@ -34,43 +34,6 @@ class EditUserFormDataTest {
     }
 
     @Test
-    @DisplayName("No arguments constructor")
-    void noArgsConstructor() {
-        EditUserFormData formData = new EditUserFormData();
-
-        assertNotNull(formData);
-    }
-
-    @Test
-    @DisplayName("All arguments constructor")
-    void allArgsConstructor() {
-        EditUserFormData formData = new EditUserFormData("username", "firstname",
-                "lastname", "test@testing.com", "https://example.com/image.jpg");
-
-        assertEquals("username", formData.getUserName());
-        assertEquals("firstname", formData.getFirstName());
-        assertEquals("lastname", formData.getLastName());
-        assertEquals("test@testing.com", formData.getEmail());
-        assertEquals("https://example.com/image.jpg", formData.getImage());
-    }
-
-    @Test
-    @DisplayName("Setters and getters")
-    void settersAndGetters() {
-        formData.setUserName("username");
-        formData.setFirstName("firstname");
-        formData.setLastName("lastname");
-        formData.setEmail("testing@test.com");
-        formData.setImage("https://example.com/image.jpg");
-
-        assertEquals("username", formData.getUserName());
-        assertEquals("firstname", formData.getFirstName());
-        assertEquals("lastname", formData.getLastName());
-        assertEquals("testing@test.com", formData.getEmail());
-        assertEquals("https://example.com/image.jpg", formData.getImage());
-    }
-
-    @Test
     @DisplayName("To entity")
     void toEntity() {
         formData.setUserName("username");
