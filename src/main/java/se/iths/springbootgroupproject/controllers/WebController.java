@@ -56,12 +56,8 @@ public class WebController {
         if (p < 0) p = 0;
         User user = userService.findByUserName(userName).get();
         List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user,PageRequest.of(p, 10));
-        List<MessageAndUsername> all = messageService.findAllMessages();
         int allMessageCount = messageService.findAllMessagesByUser(user).size();
-        List<String> distinctUserNames = all.stream()
-                .map(MessageAndUsername::userUserName)
-                .distinct()
-                .collect(Collectors.toList());
+        List<String> distinctUserNames = userService.findAll().stream().map(User::getUserName).collect(Collectors.toList());
         distinctUserNames.add("Show All");
         List<MessageAndUsername> distinctUserMessages = messages.stream()
                 .filter(message -> message.userUserName().equals(userName))
@@ -80,10 +76,7 @@ public class WebController {
         int p = Integer.parseInt(page);
         if (p < 0) p = 0;
         List<MessageAndUsername> messages = messageService.findAllMessages(PageRequest.of(p, 10));
-        List<String> distinctUserNames = messages.stream()
-                .map(MessageAndUsername::userUserName)
-                .distinct()
-                .toList();
+        List<String> distinctUserNames = userService.findAll().stream().map(User::getUserName).toList();
         int allMessageCount = messageService.findAllMessages().size();
         model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", messages);
