@@ -93,7 +93,7 @@ class UserServiceTest {
     @Test
     @DisplayName("Find by Email")
     void findByEmail() {
-        when(userRepository.findByEmail(Mockito.<String>any())).thenReturn(user);
+        when(userRepository.findByEmail(Mockito.<String>any())).thenReturn(Optional.ofNullable(user));
         User actualFindByEmailResult = userService.findByEmail("frodo.baggins@shire.com");
 
         verify(userRepository).findByEmail("frodo.baggins@shire.com");
