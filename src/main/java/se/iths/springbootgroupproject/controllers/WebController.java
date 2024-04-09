@@ -55,9 +55,11 @@ public class WebController {
     }
 
     @GetMapping("/user")
-    public String guestPageUser(@RequestParam("username")String userName , Model model, HttpServletRequest httpServletRequest) {
+    public String messagePageUser(@RequestParam(value = "page", defaultValue = "0") String page, @RequestParam("username")String userName , Model model, HttpServletRequest httpServletRequest) {
+        int p = Integer.parseInt(page);
+        if (p < 0) p = 0;
         User user = userService.findByUserName(userName).get();
-        List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user);
+        List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user,PageRequest.of(p, 10));
         List<MessageAndUsername> all = messageService.findAllMessages();
         int allMessageCount = messageService.findAllMessagesByUser(user).size();
         List<String> distinctUserNames = all.stream()
@@ -69,9 +71,11 @@ public class WebController {
                 .toList();
         model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", distinctUserMessages);
+        model.addAttribute("currentPage", p);
+        model.addAttribute("currentUser",userName);
         model.addAttribute("httpServletRequest", httpServletRequest);
         model.addAttribute("totalPublicMessages", allMessageCount);
-        return "messages";
+        return "messagesfromuser";
     }
 
     @GetMapping("/messages")
