@@ -42,7 +42,33 @@ public class WebController {
         if (p < 0) p = 0;
         List<MessageAndUsername> publicMessages = messageService.findAllByPrivateMessageIsFalse(PageRequest.of(p, 10));
         int allPublicMessageCount = messageService.findAllByPrivateMessageIsFalse().size();
+        List<String> distinctUserNames = publicMessages.stream()
+                .map(MessageAndUsername::userUserName)
+                .distinct()
+                .toList();
+        model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", publicMessages);
+        model.addAttribute("httpServletRequest", httpServletRequest);
+        model.addAttribute("currentPage", p);
+        model.addAttribute("totalPublicMessages", allPublicMessageCount);
+        return "welcome";
+    }
+
+    @GetMapping("/user")
+    public String guestPageUser(@RequestParam(value = "page", defaultValue = "0") String page,@RequestParam("username")String userName , Model model, HttpServletRequest httpServletRequest) {
+        int p = Integer.parseInt(page);
+        if (p < 0) p = 0;
+        List<MessageAndUsername> publicMessages = messageService.findAllByPrivateMessageIsFalse(PageRequest.of(p, 10));
+        int allPublicMessageCount = messageService.findAllByPrivateMessageIsFalse().size();
+        List<String> distinctUserNames = publicMessages.stream()
+                .map(MessageAndUsername::userUserName)
+                .distinct()
+                .toList();
+        List<MessageAndUsername> distinctUserMessages = publicMessages.stream()
+                .filter(message -> message.userUserName().equals(userName))
+                .toList();
+        model.addAttribute("userList", distinctUserNames);
+        model.addAttribute("messages", distinctUserMessages);
         model.addAttribute("httpServletRequest", httpServletRequest);
         model.addAttribute("currentPage", p);
         model.addAttribute("totalPublicMessages", allPublicMessageCount);
@@ -95,14 +121,14 @@ public class WebController {
 
     @PostMapping("/myprofile/edit")
     public String editUserProfile(@Valid @ModelAttribute("formData") EditUserFormData userForm,
-                    BindingResult bindingResult,
-                    @AuthenticationPrincipal OAuth2User principal) {
+                                  BindingResult bindingResult,
+                                  @AuthenticationPrincipal OAuth2User principal) {
 
         User user = userService.findByGitHubId(principal.getAttribute("id"));
-        if (checkIfUsernameAlreadyExists(userForm.getUserName(),user)) {
-            bindingResult.rejectValue("userName","duplicate", "Username needs to be unique");
+        if (checkIfUsernameAlreadyExists(userForm.getUserName(), user)) {
+            bindingResult.rejectValue("userName", "duplicate", "Username needs to be unique");
         }
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "edituser";
         }
         user.setUserName(userForm.getUserName());
@@ -138,7 +164,7 @@ public class WebController {
                               @RequestParam("id") Long id,
                               RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addAttribute("id",id);
+            redirectAttributes.addAttribute("id", id);
             return "redirect:/web/myprofile/editmessage";
         }
         Message message = messageService.findById(id);
@@ -175,9 +201,9 @@ public class WebController {
         String translatedMessage = libreTranslateService.translateMessage(message.getMessageBody());
         model.addAttribute("title", translatedTitle);
         model.addAttribute("message", translatedMessage);
-        model.addAttribute("userName",message.getUser().getUserName());
+        model.addAttribute("userName", message.getUser().getUserName());
         model.addAttribute("date", message.getDate());
-        model.addAttribute("lastChanged",message.getLastChanged());
+        model.addAttribute("lastChanged", message.getLastChanged());
         return "translatemessage";
     }
 
