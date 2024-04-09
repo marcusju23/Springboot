@@ -69,7 +69,7 @@ public class WebController {
         model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", distinctUserMessages);
         model.addAttribute("currentPage", p);
-        model.addAttribute("currentUser",userName);
+        model.addAttribute("currentUser", userName);
         model.addAttribute("httpServletRequest", httpServletRequest);
         model.addAttribute("totalPublicMessages", allMessageCount);
         return "messagesfromuser";
