@@ -1,5 +1,7 @@
 package se.iths.springbootgroupproject.entities;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,25 +82,10 @@ class UserTest {
 
         assertEquals(githubId, user.getGithubId());
     }
-
     @Test
-    @DisplayName("Two users with same ID should be equal")
-    void twoUserWithSameIdShouldBeEqual() {
-        user.setId(1L);
-        User user2 = new User();
-        user2.setId(1L);
-        assertEquals(user, user2);
-
-        user2.setId(2L);
-        assertNotEquals(user, user2);
+    void testHashCodeEquals(){
+        EqualsVerifier.simple().forClass(User.class).suppress(Warning.IDENTICAL_COPY_FOR_VERSIONED_ENTITY).suppress(Warning.SURROGATE_KEY).verify();
     }
-
-    @Test
-    @DisplayName("Hash code remains consistent for the same object instance")
-    void hashCodeConsistencyForSameObject() {
-        assertEquals(user.hashCode(), user.hashCode());
-    }
-
     /*
     *       Several FullName tests
     * */
