@@ -42,10 +42,6 @@ public class User {
 
     @Override
     public final int hashCode() {
-        if (this instanceof HibernateProxy) {
-            return ((HibernateProxy) this).getHibernateLazyInitializer().getIdentifier().hashCode();
-        } else {
-            return getId() != null ? getId().hashCode() : super.hashCode();
-        }
+        return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
 }
