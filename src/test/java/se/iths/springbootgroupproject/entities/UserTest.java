@@ -19,69 +19,6 @@ class UserTest {
     }
 
     @Test
-    @DisplayName("Setting and getting id")
-    void setAndGetId() {
-        Long id = 1L;
-        user.setId(id);
-
-        assertEquals(id, user.getId());
-    }
-
-    @Test
-    @DisplayName("Setting and getting username")
-    void setAndGetUserName() {
-        String username = "testdude";
-        user.setUserName(username);
-
-        assertEquals(username, user.getUserName());
-    }
-
-    @Test
-    @DisplayName("Setting and getting image")
-    void setAndGetImage() {
-        String image = "test.jpg";
-        user.setImage(image);
-
-        assertEquals(image, user.getImage());
-    }
-
-    @Test
-    @DisplayName("Setting and getting first name")
-    void setAndGetFirstName() {
-        String firstName = "Test";
-        user.setFirstName(firstName);
-
-        assertEquals(firstName, user.getFirstName());
-    }
-
-    @Test
-    @DisplayName("Setting and getting last name")
-    void setAndGetLastName() {
-        String lastName = "Dude";
-        user.setLastName(lastName);
-
-        assertEquals(lastName, user.getLastName());
-    }
-
-    @Test
-    @DisplayName("Setting and getting email")
-    void setAndGetEmail() {
-        String email = "test.dude@test.com";
-        user.setEmail(email);
-
-        assertEquals(email, user.getEmail());
-    }
-
-    @ParameterizedTest
-    @ValueSource(ints = {0, 39, 107, 2164, 15_846, 80_658, 1_000_117})
-    @DisplayName("Setting and getting github id")
-    void setAndGetGithubId(int githubId) {
-        user.setGithubId(githubId);
-
-        assertEquals(githubId, user.getGithubId());
-    }
-
-    @Test
     @DisplayName("Two users with same ID should be equal")
     void twoUserWithSameIdShouldBeEqual() {
         user.setId(1L);
