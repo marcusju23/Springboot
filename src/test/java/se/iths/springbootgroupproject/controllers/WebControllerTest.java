@@ -16,6 +16,7 @@ import se.iths.springbootgroupproject.configurations.SecurityConfig;
 import se.iths.springbootgroupproject.dto.MessageAndUsername;
 import se.iths.springbootgroupproject.entities.Message;
 import se.iths.springbootgroupproject.entities.User;
+import se.iths.springbootgroupproject.services.LibreTranslateService;
 import se.iths.springbootgroupproject.services.MessageService;
 import se.iths.springbootgroupproject.services.UserService;
 import se.iths.springbootgroupproject.services.github.GithubOAuth2UserService;
@@ -45,6 +46,8 @@ class WebControllerTest {
     private MessageService messageService;
     @MockBean
     private GithubOAuth2UserService githubOAuth2UserService;
+    @MockBean
+    private LibreTranslateService libreTranslateService;
 
     private MessageAndUsername message;
     private MessageAndUsername message2;
