@@ -19,6 +19,13 @@
         <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
     </div>
 </div>
+<div class="search-list">
+    <div class="list-content" id="dropdown-search">
+        <p th:each="user : ${userList}">
+            <a th:href="@{'user?username=' + ${user}}" th:text="${user}">User</a>
+        </p>
+    </div>
+</div>
 <div class="profile-link">
     <a th:href="'/web/myprofile'">
         <i class="gg-profile"></i>
@@ -37,6 +44,11 @@
     <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/messages?page='+${currentPage+1}">
         <i class="gg-arrow-right-r"></i>
     </a>
+</div>
+<div>
+    <div id="search-container">
+        <img id="search-img" th:src="'https://i.imgur.com/Eg5HlJa.jpeg'" alt="">
+    </div>
 </div>
 <table class="styled-table">
     <thead>
