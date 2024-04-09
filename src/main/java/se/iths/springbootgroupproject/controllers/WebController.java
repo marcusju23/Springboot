@@ -21,6 +21,7 @@ import se.iths.springbootgroupproject.services.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/web")
@@ -60,7 +61,8 @@ public class WebController {
         List<String> distinctUserNames = all.stream()
                 .map(MessageAndUsername::userUserName)
                 .distinct()
-                .toList();
+                .collect(Collectors.toList());
+        distinctUserNames.add("Show All");
         List<MessageAndUsername> distinctUserMessages = messages.stream()
                 .filter(message -> message.userUserName().equals(userName))
                 .toList();

@@ -22,7 +22,8 @@
 <div class="search-list">
     <div class="list-content" id="dropdown-search">
         <p th:each="user : ${userList}">
-            <a th:href="@{${httpServletRequest.requestURI} +'?username=' + ${user}}" th:text="${user}">User</a>
+            <a th:if="${user} == 'Show All'" th:href="@{'/web/messages'}" th:text="${user}">Show all</a>
+            <a th:if="${user} != 'Show All'" th:href="@{${httpServletRequest.requestURI} +'?username=' + ${user}}" th:text="${user}">User</a>
         </p>
     </div>
 </div>
