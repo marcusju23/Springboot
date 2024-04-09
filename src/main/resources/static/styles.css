@@ -31,7 +31,7 @@
 .list-content{
     display: none;
     position: fixed;
-    top: 50px;
+    top: 150px;
     left: 8vw;
     background-color: #f9f9f9;
     min-width: 120px;

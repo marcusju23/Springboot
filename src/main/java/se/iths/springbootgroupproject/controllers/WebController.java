@@ -55,24 +55,22 @@ public class WebController {
     }
 
     @GetMapping("/user")
-    public String guestPageUser(@RequestParam(value = "page", defaultValue = "0") String page,@RequestParam("username")String userName , Model model, HttpServletRequest httpServletRequest) {
-        int p = Integer.parseInt(page);
-        if (p < 0) p = 0;
-        List<MessageAndUsername> publicMessages = messageService.findAllByPrivateMessageIsFalse(PageRequest.of(p, 10));
-        int allPublicMessageCount = messageService.findAllByPrivateMessageIsFalse().size();
-        List<String> distinctUserNames = publicMessages.stream()
+    public String guestPageUser(@RequestParam("username")String userName , Model model, HttpServletRequest httpServletRequest) {
+        User user = userService.findByUserName(userName).get();
+        List<MessageAndUsername> messages = messageService.findAllByUserIdAndPrivateMessageIsFalse(user.getId());
+        int allMessageCount = messageService.findAllMessagesByUser(user).size();
+        List<String> distinctUserNames = messages.stream()
                 .map(MessageAndUsername::userUserName)
                 .distinct()
                 .toList();
-        List<MessageAndUsername> distinctUserMessages = publicMessages.stream()
+        List<MessageAndUsername> distinctUserMessages = messages.stream()
                 .filter(message -> message.userUserName().equals(userName))
                 .toList();
         model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", distinctUserMessages);
         model.addAttribute("httpServletRequest", httpServletRequest);
-        model.addAttribute("currentPage", p);
-        model.addAttribute("totalPublicMessages", allPublicMessageCount);
-        return "welcome";
+        model.addAttribute("totalPublicMessages", allMessageCount);
+        return "messages";
     }
 
     @GetMapping("/messages")
