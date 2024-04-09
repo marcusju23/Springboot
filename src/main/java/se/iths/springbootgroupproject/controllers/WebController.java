@@ -42,11 +42,6 @@ public class WebController {
         if (p < 0) p = 0;
         List<MessageAndUsername> publicMessages = messageService.findAllByPrivateMessageIsFalse(PageRequest.of(p, 10));
         int allPublicMessageCount = messageService.findAllByPrivateMessageIsFalse().size();
-        List<String> distinctUserNames = publicMessages.stream()
-                .map(MessageAndUsername::userUserName)
-                .distinct()
-                .toList();
-        model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", publicMessages);
         model.addAttribute("httpServletRequest", httpServletRequest);
         model.addAttribute("currentPage", p);
