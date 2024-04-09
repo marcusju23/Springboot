@@ -1,6 +1,5 @@
 package se.iths.springbootgroupproject.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +26,8 @@ class GuestControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Autowired
-    ObjectMapper mapper;
-
     @MockBean
     MessageService messageService;
-
 
     private MessageAndUsername message1;
     private MessageAndUsername message2;
