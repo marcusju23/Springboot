@@ -7,3 +7,12 @@ document.getElementById("globe-icon").addEventListener("click", function() {
         dropdownContent.style.display = "block";
     }
 });
+
+document.getElementById("search-img").addEventListener("click", function() {
+    let dropdownContent = document.getElementById("dropdown-search");
+    if (dropdownContent.style.display === "block") {
+        dropdownContent.style.display = "none";
+    } else {
+        dropdownContent.style.display = "block";
+    }
+});
