@@ -84,4 +84,8 @@ public class MessageService {
             return message.get();
         throw new EntityNotFoundException();
     }
+
+    public void delete(Message message) {
+        messageRepository.delete(message);
+    }
 }

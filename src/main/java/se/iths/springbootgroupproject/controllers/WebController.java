@@ -132,6 +132,19 @@ public class WebController {
         return "editmessage";
     }
 
+    @GetMapping("/myprofile/deletemessage")
+    public String deleteMessage(@RequestParam("id") Long id, @AuthenticationPrincipal OAuth2User principal) {
+        Message message = messageService.findById(id);
+        User currentUser = userService.findByGitHubId(principal.getAttribute("id"));
+
+        if (!message.getUser().getId().equals(currentUser.getId())) {
+            return "redirect:/web/myprofile";
+        }
+        messageService.delete(message);
+
+        return "redirect:/web/myprofile";
+    }
+
     @PostMapping("/myprofile/editmessage")
     public String editMessage(@Valid @ModelAttribute("formData") CreateMessageFormData messageForm,
                               BindingResult bindingResult,

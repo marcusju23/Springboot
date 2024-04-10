@@ -19,7 +19,10 @@
         </select>
     <p th:if="${#fields.hasErrors('privateMessage')}"
     th:text="${#strings.listJoin(#fields.errors('privateMessage'), ', ')}"></p>
-    <p><input type="submit" th:value="#{edit}"/> <input type="reset" th:value="#{reset}"/> <input type="button" th:value="#{back}" onclick="history.back()"/></p>
+    <p><input type="submit" th:value="#{edit}"/><input type="reset" th:value="#{reset}"/> <input type="button" th:value="#{back}" onclick="history.back()"/></p>
 </form>
+<a th:href="@{/web/myprofile/deletemessage(id=${messageId})}">
+    <button th:text="#{delete}">Delete this message</button>
+</a>
 </body>
 </html>
