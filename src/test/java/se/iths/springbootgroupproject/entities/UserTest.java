@@ -37,8 +37,8 @@ class UserTest {
     }
 
     /*
-    *       Several FullName tests
-    * */
+     *       Several FullName tests
+     */
     @ParameterizedTest
     @ValueSource(strings = {"The Dude", "Dude", "TheDude"})
     @DisplayName("Setting full name")

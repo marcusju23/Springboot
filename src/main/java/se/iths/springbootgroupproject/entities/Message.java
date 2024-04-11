@@ -18,7 +18,6 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @CreatedDate
     private LocalDate date;
     private LocalDate lastChanged;
@@ -44,4 +43,5 @@ public class Message {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
 }

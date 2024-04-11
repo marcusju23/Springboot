@@ -70,7 +70,7 @@ class GuestControllerTest {
     @WithMockUser
     void getAllPublicUserMessagesOfUser() throws Exception {
         when(messageService.findAllByUserIdAndPrivateMessageIsFalse(user.getId())).thenReturn(List.of(message1));
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/messages/users/"+user.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/messages/users/" + user.getId()))
                 .andExpectAll(
                         status().isOk(),
                         content().contentType("Application/Json"),
@@ -81,8 +81,9 @@ class GuestControllerTest {
     @WithMockUser
     void return204IfNoUserMessages() throws Exception {
         when(messageService.findAllByUserIdAndPrivateMessageIsFalse(user.getId())).thenReturn(List.of());
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/messages/users/"+user.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/messages/users/" + user.getId()))
                 .andExpect(
                         status().isNoContent());
     }
+
 }

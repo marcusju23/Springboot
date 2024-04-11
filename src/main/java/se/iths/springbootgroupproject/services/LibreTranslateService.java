@@ -33,12 +33,13 @@ public class LibreTranslateService {
         String sourceLanguage = "en";
         String targetLanguage = "sv";
 
-        if(detectMessageLanguage(text)) {
+        if (detectMessageLanguage(text)) {
             sourceLanguage = "sv";
             targetLanguage = "en";
         }
 
-        String jsonString = String.format("{\"q\":\"%s\",\"source\":\"%s\",\"target\":\"%s\"}", text, sourceLanguage, targetLanguage);
+        String jsonString = String
+                .format("{\"q\":\"%s\",\"source\":\"%s\",\"target\":\"%s\"}", text, sourceLanguage, targetLanguage);
 
         return Objects.requireNonNull(restClient.post()
                         .uri("http://localhost:5000/translate")
@@ -48,7 +49,7 @@ public class LibreTranslateService {
                         .retrieve()
                         .body(String.class))
                 .split(":")[1]
-                .replaceAll("[{\"}]","");
+                .replaceAll("[{\"}]", "");
     }
 
 }

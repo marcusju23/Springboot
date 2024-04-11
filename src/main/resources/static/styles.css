@@ -28,7 +28,7 @@
     left: 10px;
 }
 
-.list-content{
+.list-content {
     display: none;
     position: fixed;
     top: 150px;
@@ -54,7 +54,7 @@
     display: block;
 }
 
-td{
+td {
     overflow-wrap: break-word;
 }
 
@@ -100,26 +100,25 @@ td{
 }
 
 .date-cell-header,
-.date-cell{
+.date-cell {
     width: 4vw;
 }
 
-
-.edit-cell-header{
+.edit-cell-header {
     width: 7vw;
 }
 
-#edit-button{
+#edit-button {
     text-align: center;
     width: 3vw;
 }
 
 .author-cell-header,
-#edit-header{
+#edit-header {
     width: 10vw;
 }
 
-.author-cell{
+.author-cell {
     width: 10vw;
 }
 
@@ -127,7 +126,6 @@ td{
     text-align: center;
     color: indigo;
     font-family: Verdana, sans-serif;
-
 }
 
 .arrows {
@@ -137,22 +135,23 @@ td{
     display: flex;
 }
 
-#new-message-and-arrows-container{
+#new-message-and-arrows-container {
     display: flex;
 }
 
-.right{
+.right {
     margin-left: 25px;
     color: inherit;
     text-decoration: none;
 }
-.left{
+
+.left {
     margin-left: -25px;
     color: inherit;
     text-decoration: none;
 }
 
-.profile-link a, .messages-link a{
+.profile-link a, .messages-link a {
     position: fixed;
     top: 10px;
     left: 10px;
@@ -160,7 +159,7 @@ td{
     text-decoration: none;
 }
 
-.logout-link a{
+.logout-link a {
     position: fixed;
     top: 13px;
     left: 50px;
@@ -168,7 +167,7 @@ td{
     text-decoration: none;
 }
 
-.login-link a{
+.login-link a {
     position: fixed;
     top: 13px;
     left: 15px;
@@ -191,25 +190,25 @@ td{
     left: 50%;
 }
 
-.edit-button a{
+.edit-button a {
     color: inherit;
     text-decoration: none;
 }
 
-#profile-container{
+#profile-container {
     display: block;
     width: 15vw;
     height: 25vw;
-    margin-left: 10vw ;
+    margin-left: 10vw;
     justify-content: space-evenly;
 }
 
-#new-message{
+#new-message {
     position: relative;
     left: 10vw;
 }
 
-#username-container{
+#username-container {
     font-size: 2.5vw;
     align-self: center;
 }
@@ -224,27 +223,28 @@ td{
     align-self: center;
 }
 
-#search-container{
+#search-container {
     width: 10vw;
     margin-left: 10vw;
     height: 2.7vw;
 }
-#search-img{
+
+#search-img {
     margin: 0;
     border-radius: 0;
 }
 
-#name, #login, #email{
+#name, #login, #email {
     margin: 0;
 }
 
-.profile-img{
+.profile-img {
     width: 240px;
     height: 240px;
     object-fit: cover;
 }
 
-img{
+img {
     display: block;
     max-width: 100%;
     object-fit: contain;
@@ -252,13 +252,13 @@ img{
     margin: auto;
 }
 
-#user-information{
+#user-information {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-html{
+html {
     font-size: 16px;
 }

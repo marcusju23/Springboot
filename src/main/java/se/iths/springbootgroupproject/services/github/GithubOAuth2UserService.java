@@ -41,4 +41,5 @@ public class GithubOAuth2UserService extends DefaultOAuth2UserService {
         user.setGithubId((Integer) attributes.get("id"));
         return user;
     }
+
 }

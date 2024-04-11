@@ -25,11 +25,11 @@
 </div>
 <h1 class="welcome-message" th:text="#{welcome}"></h1>
 <div class="arrows">
-    <a class="left" th:if="${currentPage>0}" th:href="'/web/welcome?page=' + ${currentPage - 1}">
+    <a class="left" th:if="${currentPage > 0}" th:href="'/web/welcome?page=' + ${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 >= 10}"
-       th:href="'/web/welcome?page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size() == 10 && totalPublicMessages - 1 >= 10}"
+       th:href="'/web/welcome?page=' + ${currentPage + 1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>
@@ -50,14 +50,11 @@
         <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
         <td class="date-cell" th:text="${message.date()}">2024-02-27</td>
         <td>
-            <p th:text="${message.lastChanged()}">
-            </p>
-            <p th:if="${message.lastChanged() != null}" th:text="#{editedby}+ ':' +${message.userUserName()}">
-            </p>
+            <p th:text="${message.lastChanged()}"></p>
+            <p th:if="${message.lastChanged() != null}" th:text="#{editedby} + ': ' + ${message.userUserName()}"></p>
         </td>
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>

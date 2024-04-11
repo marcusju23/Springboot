@@ -1,5 +1,5 @@
 // shows dropdown menu when user clicks the icon
-document.getElementById("globe-icon").addEventListener("click", function() {
+document.getElementById("globe-icon").addEventListener("click", function () {
     let dropdownContent = document.getElementById("dropdown-content");
     if (dropdownContent.style.display === "block") {
         dropdownContent.style.display = "none";
@@ -8,7 +8,7 @@ document.getElementById("globe-icon").addEventListener("click", function() {
     }
 });
 
-document.getElementById("search-img").addEventListener("click", function() {
+document.getElementById("search-img").addEventListener("click", function () {
     let dropdownContent = document.getElementById("dropdown-search");
     if (dropdownContent.style.display === "block") {
         dropdownContent.style.display = "none";

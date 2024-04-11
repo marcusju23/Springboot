@@ -3,21 +3,17 @@ package se.iths.springbootgroupproject.entities;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class MessageTest {
 
     private Message message = new Message();
-    private User user = new User();
-    private LocalDate date = LocalDate.now();
 
     @BeforeEach
     void setUp() {
         message = new Message();
-        user = new User();
-        date = LocalDate.now();
     }
 
     @Test
@@ -37,4 +33,5 @@ class MessageTest {
     void hashCodeConsistencyForSameObject() {
         assertEquals(message.hashCode(), message.hashCode());
     }
+
 }

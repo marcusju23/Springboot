@@ -23,7 +23,8 @@
     <div class="list-content" id="dropdown-search">
         <p th:each="user : ${userList}">
             <a th:if="${user} == 'Show All'" th:href="@{'/web/messages'}" th:text="${user}">Show all</a>
-            <a th:if="${user} != 'Show All'" th:href="@{${httpServletRequest.requestURI} +'?username=' + ${user}}" th:text="${user}">User</a>
+            <a th:if="${user} != 'Show All'" th:href="@{${httpServletRequest.requestURI} + '?username=' + ${user}}"
+               th:text="${user}">User</a>
         </p>
     </div>
 </div>
@@ -39,11 +40,12 @@
 </div>
 <h1 class="welcome-message" th:text="#{messages.welcome}"></h1>
 <div class="arrows">
-    <a class="left" th:if="${currentPage>0}" th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage - 1}">
+    <a class="left" th:if="${currentPage > 0}"
+       th:href="'/web/user?username=' + ${currentUser} + '&page=' + ${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 >= 10}"
-       th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size() == 10 && totalPublicMessages - 1 >= 10}"
+       th:href="'/web/user?username=' + ${currentUser} + '&page=' + ${currentPage + 1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>
@@ -57,8 +59,8 @@
     <tr>
         <th th:text="#{title}"></th>
         <th th:text="#{body}"></th>
-        <th class ="author-cell-header" th:text="#{author}"></th>
-        <th class ="date-cell-header" th:text="#{date}"></th>
+        <th class="author-cell-header" th:text="#{author}"></th>
+        <th class="date-cell-header" th:text="#{date}"></th>
         <th class="edit-cell-header" th:text="#{lastedit}"></th>
     </tr>
     </thead>
@@ -67,21 +69,18 @@
         <td th:text="${message.title()}">Important Announcement</td>
         <td class="messageContainer">
             <span th:text="${message.messageBody()}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-            <a th:href="'/web/messages/translate?id=' +${message.id()}">
-            <h5 class="translateBtn" th:text="#{translate}">translate</h5>
+            <a th:href="'/web/messages/translate?id=' + ${message.id()}">
+                <h5 class="translateBtn" th:text="#{translate}">translate</h5>
             </a>
         </td>
         <td class="author-cell" th:text="${message.userUserName()}">John Doe</td>
         <td class="date-cell" th:text="${message.date()}">2024-02-27</td>
         <td>
-            <p th:text="${message.lastChanged()}">
-            </p>
-            <p th:if="${message.lastChanged() != null}" th:text="#{editedby}+ ':' +${message.userUserName()}">
-            </p>
+            <p th:text="${message.lastChanged()}"></p>
+            <p th:if="${message.lastChanged() != null}" th:text="#{editedby} + ': ' +${message.userUserName()}"></p>
         </td>
     </tr>
     </tbody>
 </table>
-
 </body>
 </html>

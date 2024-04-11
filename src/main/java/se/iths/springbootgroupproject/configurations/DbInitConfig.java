@@ -17,7 +17,7 @@ public class DbInitConfig {
 
     //For development purpose we init db with some values
     @Bean
-    ApplicationRunner databaseInit2(MessageRepository repository, UserRepository userRepository){
+    ApplicationRunner databaseInit2(MessageRepository repository, UserRepository userRepository) {
         return args -> {
             var result = repository.findByTitle("TempTitle");
             var result2 = repository.findByTitle("En riktig titel");
@@ -25,7 +25,7 @@ public class DbInitConfig {
             var result4 = repository.findByTitle("Test 255");
             var userResult = userRepository.findByUserName("Jame Sbond 070");
             var user = new User();
-            if (userResult.isEmpty()){
+            if (userResult.isEmpty()) {
                 user.setUserName("Jame Sbond 070");
                 userRepository.save(user);
             }
@@ -35,20 +35,20 @@ public class DbInitConfig {
                 message.setMessageBody("BodyOfTheMessage");
                 saveUser(message, user, repository);
             }
-            if (result2.isEmpty()){
+            if (result2.isEmpty()) {
                 var message = new Message();
                 message.setTitle("En riktig titel");
                 message.setMessageBody("Riktig riklig text");
                 saveUser(message, user, repository);
             }
-            if (result3.isEmpty()){
+            if (result3.isEmpty()) {
                 var message = new Message();
                 message.setTitle("Privat meddelande titel");
                 message.setMessageBody("Schh hemligt hehehihi");
                 message.setPrivateMessage(true);
                 saveUser(message, user, repository);
             }
-            if (result4.isEmpty()){
+            if (result4.isEmpty()) {
                 var message = new Message();
                 message.setTitle("Test 255");
                 message.setMessageBody("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus felis ac libero vestibulum, sed lobortis velit sodales. Nulla non risus non enim scelerisque ullamcorper. Suspendisse potenti. Proin euismod dictum velit, id consectetur elit tempor et.");
@@ -56,9 +56,11 @@ public class DbInitConfig {
             }
         };
     }
-    private void saveUser(Message message, User user, MessageRepository repository){
+
+    private void saveUser(Message message, User user, MessageRepository repository) {
         message.setUser(user);
         message.setDate(LocalDate.now());
         repository.save(message);
     }
+
 }

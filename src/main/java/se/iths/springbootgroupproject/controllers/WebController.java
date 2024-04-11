@@ -31,18 +31,22 @@ public class WebController {
     private final UserService userService;
     private final LibreTranslateService libreTranslateService;
 
-    public WebController(MessageService messageService, UserService userService, LibreTranslateService libreTranslateService) {
+    public WebController(MessageService messageService, UserService userService,
+                         LibreTranslateService libreTranslateService) {
         this.messageService = messageService;
         this.userService = userService;
         this.libreTranslateService = libreTranslateService;
     }
 
     @GetMapping("/welcome")
-    public String guestPage(@RequestParam(value = "page", defaultValue = "0") String page, Model model, HttpServletRequest httpServletRequest) {
+    public String guestPage(@RequestParam(value = "page", defaultValue = "0") String page,
+                            Model model,
+                            HttpServletRequest httpServletRequest) {
         int p = Integer.parseInt(page);
         if (p < 0) p = 0;
         List<MessageAndUsername> publicMessages = messageService.findAllByPrivateMessageIsFalse(PageRequest.of(p, 10));
         int allPublicMessageCount = messageService.findAllByPrivateMessageIsFalse().size();
+
         model.addAttribute("messages", publicMessages);
         model.addAttribute("httpServletRequest", httpServletRequest);
         model.addAttribute("currentPage", p);
@@ -51,17 +55,21 @@ public class WebController {
     }
 
     @GetMapping("/user")
-    public String messagePageUser(@RequestParam(value = "page", defaultValue = "0") String page, @RequestParam("username")String userName , Model model, HttpServletRequest httpServletRequest) {
+    public String messagePageUser(@RequestParam(value = "page", defaultValue = "0") String page,
+                                  @RequestParam("username") String userName,
+                                  Model model,
+                                  HttpServletRequest httpServletRequest) {
         int p = Integer.parseInt(page);
         if (p < 0) p = 0;
         User user = userService.findByUserName(userName).get();
-        List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user,PageRequest.of(p, 10));
+        List<MessageAndUsername> messages = messageService.findAllMessagesByUser(user, PageRequest.of(p, 10));
         int allMessageCount = messageService.findAllMessagesByUser(user).size();
         List<String> distinctUserNames = userService.findAll().stream().map(User::getUserName).collect(Collectors.toList());
         distinctUserNames.add("Show All");
         List<MessageAndUsername> distinctUserMessages = messages.stream()
                 .filter(message -> message.userUserName().equals(userName))
                 .toList();
+
         model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", distinctUserMessages);
         model.addAttribute("currentPage", p);
@@ -72,12 +80,15 @@ public class WebController {
     }
 
     @GetMapping("/messages")
-    public String messagePage(@RequestParam(value = "page", defaultValue = "0") String page, Model model, HttpServletRequest httpServletRequest) {
+    public String messagePage(@RequestParam(value = "page", defaultValue = "0") String page,
+                              Model model,
+                              HttpServletRequest httpServletRequest) {
         int p = Integer.parseInt(page);
         if (p < 0) p = 0;
         List<MessageAndUsername> messages = messageService.findAllMessages(PageRequest.of(p, 10));
         List<String> distinctUserNames = userService.findAll().stream().map(User::getUserName).toList();
         int allMessageCount = messageService.findAllMessages().size();
+
         model.addAttribute("userList", distinctUserNames);
         model.addAttribute("messages", messages);
         model.addAttribute("httpServletRequest", httpServletRequest);
@@ -87,7 +98,10 @@ public class WebController {
     }
 
     @GetMapping("/myprofile")
-    public String userProfile(@RequestParam(value = "page", defaultValue = "0") String page, Model model, @AuthenticationPrincipal OAuth2User principal, HttpServletRequest httpServletRequest) {
+    public String userProfile(@RequestParam(value = "page", defaultValue = "0") String page,
+                              Model model,
+                              @AuthenticationPrincipal OAuth2User principal,
+                              HttpServletRequest httpServletRequest) {
         int p = Integer.parseInt(page);
         if (p < 0) p = 0;
         User user = userService.findByGitHubId(principal.getAttribute("id"));
@@ -102,14 +116,19 @@ public class WebController {
         model.addAttribute("userName", user.getUserName());
         model.addAttribute("profilepic", user.getImage());
         model.addAttribute("email", user.getEmail());
-
         return "userprofile";
     }
 
     @GetMapping("/myprofile/edit")
     public String editUserProfile(Model model, @AuthenticationPrincipal OAuth2User principal) {
         User user = userService.findByGitHubId(principal.getAttribute("id"));
-        model.addAttribute("formData", new EditUserFormData(user.getUserName(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getImage()));
+
+        model.addAttribute("formData", new EditUserFormData(
+                user.getUserName(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getImage()));
         return "edituser";
     }
 
@@ -121,14 +140,13 @@ public class WebController {
     public String editUserProfile(@Valid @ModelAttribute("formData") EditUserFormData userForm,
                                   BindingResult bindingResult,
                                   @AuthenticationPrincipal OAuth2User principal) {
-
         User user = userService.findByGitHubId(principal.getAttribute("id"));
-        if (checkIfUsernameAlreadyExists(userForm.getUserName(), user)) {
+
+        if (checkIfUsernameAlreadyExists(userForm.getUserName(), user))
             bindingResult.rejectValue("userName", "duplicate", "Username needs to be unique");
-        }
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "edituser";
-        }
+
         user.setUserName(userForm.getUserName());
         user.setFirstName(userForm.getFirstName());
         user.setLastName(userForm.getLastName());
@@ -144,15 +162,14 @@ public class WebController {
         Message message = messageService.findById(id);
         User currentUser = userService.findByGitHubId(principal.getAttribute("id"));
 
-        if (!message.getUser().getId().equals(currentUser.getId())) {
+        if (!message.getUser().getId().equals(currentUser.getId()))
             return "redirect:/web/myprofile";
-        }
 
+        model.addAttribute("messageId", message.getId());
         model.addAttribute("formData", new CreateMessageFormData(
                 message.getTitle(),
                 message.getMessageBody(),
                 message.isPrivateMessage()));
-        model.addAttribute("messageId", message.getId());
         return "editmessage";
     }
 
@@ -161,11 +178,10 @@ public class WebController {
         Message message = messageService.findById(id);
         User currentUser = userService.findByGitHubId(principal.getAttribute("id"));
 
-        if (!message.getUser().getId().equals(currentUser.getId())) {
+        if (!message.getUser().getId().equals(currentUser.getId()))
             return "redirect:/web/myprofile";
-        }
-        messageService.delete(message);
 
+        messageService.delete(message);
         return "redirect:/web/myprofile";
     }
 
@@ -178,6 +194,7 @@ public class WebController {
             redirectAttributes.addAttribute("id", id);
             return "redirect:/web/myprofile/editmessage";
         }
+
         Message message = messageService.findById(id);
         message.setMessageBody(messageForm.getMessageBody());
         message.setTitle(messageForm.getTitle());
@@ -197,9 +214,9 @@ public class WebController {
     public String createMessage(@Valid @ModelAttribute("formData") CreateMessageFormData messageForm,
                                 BindingResult bindingResult,
                                 @AuthenticationPrincipal OAuth2User principal) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "createmessage";
-        }
+
         User user = userService.findByGitHubId(principal.getAttribute("id"));
         messageService.save(messageForm.toEntity(user));
         return "redirect:/web/myprofile";
@@ -210,6 +227,7 @@ public class WebController {
         Message message = messageService.findById(id);
         String translatedTitle = libreTranslateService.translateMessage(message.getTitle());
         String translatedMessage = libreTranslateService.translateMessage(message.getMessageBody());
+
         model.addAttribute("title", translatedTitle);
         model.addAttribute("message", translatedMessage);
         model.addAttribute("userName", message.getUser().getUserName());

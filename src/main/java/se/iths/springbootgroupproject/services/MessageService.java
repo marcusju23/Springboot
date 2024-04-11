@@ -72,6 +72,7 @@ public class MessageService {
     public List<MessageAndUsername> findAllMessagesByUser(User user) {
         return messageRepository.findAllByUser(user);
     }
+
     @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void save(Message message) {
         messageRepository.save(message);
@@ -84,8 +85,10 @@ public class MessageService {
             return message.get();
         throw new EntityNotFoundException();
     }
+
     @CacheEvict(value = {"messages", "publicMessages"}, allEntries = true)
     public void delete(Message message) {
         messageRepository.delete(message);
     }
+
 }

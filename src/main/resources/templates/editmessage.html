@@ -6,20 +6,21 @@
 </head>
 <body>
 <h1 th:text="#{updatemessage}"></h1>
-<form action = "#" th:action="@{/web/myprofile/editmessage(id=${messageId})}" th:object="${formData}" method="post">
-    <p><label for="title"  th:text="#{title} + ':'"/>
+<form action="#" th:action="@{/web/myprofile/editmessage(id=${messageId})}" th:object="${formData}" method="post">
+    <p><label for="title" th:text="#{title} + ':'"/>
         <br><input id="title" type="text" th:field="*{title}"/>
     <p><label for="body" th:text="#{messagebody} + ':'"/>
         <br><textarea id="body" rows="7" cols="25" th:field="*{messageBody}"></textarea>
-    <p>
-        <label for="privacy" th:text="#{messageprivacy} + ':'"/>
+    <p><label for="privacy" th:text="#{messageprivacy} + ':'"/>
         <select id="privacy" th:field="*{privateMessage}">
             <option th:value="true" th:text="#{private}"></option>
             <option th:value="false" th:text="#{public}"></option>
         </select>
     <p th:if="${#fields.hasErrors('privateMessage')}"
-    th:text="${#strings.listJoin(#fields.errors('privateMessage'), ', ')}"></p>
-    <p><input type="submit" th:value="#{edit}"/><input type="reset" th:value="#{reset}"/> <input type="button" th:value="#{back}" onclick="history.back()"/></p>
+       th:text="${#strings.listJoin(#fields.errors('privateMessage'), ', ')}"></p>
+    <p><input type="submit" th:value="#{edit}"/>
+        <input type="reset" th:value="#{reset}"/>
+        <input type="button" th:value="#{back}" onclick="history.back()"/></p>
 </form>
 <a th:href="@{/web/myprofile/deletemessage(id=${messageId})}">
     <button th:text="#{delete}">Delete this message</button>
