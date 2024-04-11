@@ -142,9 +142,9 @@ public class WebController {
     @GetMapping("/myprofile/editmessage")
     public String editMessage(Model model, @RequestParam("id") Long id, @AuthenticationPrincipal OAuth2User principal) {
         Message message = messageService.findById(id);
-        User currectUser = userService.findByGitHubId(principal.getAttribute("id"));
+        User currentUser = userService.findByGitHubId(principal.getAttribute("id"));
 
-        if (!message.getUser().getId().equals(currectUser.getId())) {
+        if (!message.getUser().getId().equals(currentUser.getId())) {
             return "redirect:/web/myprofile";
         }
 
