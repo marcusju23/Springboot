@@ -143,9 +143,13 @@ td{
 
 .right{
     margin-left: 25px;
+    color: inherit;
+    text-decoration: none;
 }
 .left{
     margin-left: -25px;
+    color: inherit;
+    text-decoration: none;
 }
 
 .profile-link a, .messages-link a{
