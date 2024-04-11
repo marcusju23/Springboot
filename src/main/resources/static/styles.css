@@ -238,6 +238,12 @@ td{
     margin: 0;
 }
 
+.profile-img{
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+}
+
 img{
     display: block;
     max-width: 100%;
