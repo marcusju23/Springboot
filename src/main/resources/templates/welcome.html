@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome to GilGang website</title>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
-        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/globe-alt.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-right-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/arrow-left-r.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/styles.css">
     <script defer src="/static/script.js"></script>
 </head>
@@ -28,7 +28,8 @@
     <a class="left" th:if="${currentPage>0}" th:href="'/web/welcome?page=' + ${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/welcome?page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}"
+       th:href="'/web/welcome?page='+${currentPage+1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>
@@ -37,8 +38,8 @@
     <tr>
         <th th:text="#{title}"></th>
         <th th:text="#{body}"></th>
-        <th class ="author-cell-header" th:text="#{author}"></th>
-        <th class ="date-cell-header" th:text="#{date}"></th>
+        <th class="author-cell-header" th:text="#{author}"></th>
+        <th class="date-cell-header" th:text="#{date}"></th>
         <th class="edit-cell-header" th:text="#{lastedit}"></th>
     </tr>
     </thead>

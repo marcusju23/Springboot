@@ -15,14 +15,15 @@
 <div class="dropdown">
     <i class="gg-globe-alt" id="globe-icon"></i>
     <div class="dropdown-content" id="dropdown-content">
-        <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=en'}">English</a>
-        <a th:href="@{${httpServletRequest.requestURI} + '?page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
+        <a th:href="@{${httpServletRequest.requestURI} +'?username=' + ${currentUser} + '&page=' + ${currentPage} + '&lang=en'}">English</a>
+        <a th:href="@{${httpServletRequest.requestURI} +'?username=' + ${currentUser} + '&page=' + ${currentPage} + '&lang=sv'}">Svenska</a>
     </div>
 </div>
 <div class="search-list">
     <div class="list-content" id="dropdown-search">
         <p th:each="user : ${userList}">
-            <a th:href="@{'user?username=' + ${user}}" th:text="${user}">User</a>
+            <a th:if="${user} == 'Show All'" th:href="@{'/web/messages'}" th:text="${user}">Show all</a>
+            <a th:if="${user} != 'Show All'" th:href="@{${httpServletRequest.requestURI} +'?username=' + ${user}}" th:text="${user}">User</a>
         </p>
     </div>
 </div>
@@ -38,10 +39,10 @@
 </div>
 <h1 class="welcome-message" th:text="#{messages.welcome}"></h1>
 <div class="arrows">
-    <a class="left" th:if="${currentPage>0}" th:href="'/web/messages?page='+${currentPage - 1}">
+    <a class="left" th:if="${currentPage>0}" th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/messages?page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage+1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>
