@@ -8,11 +8,11 @@
 <h1 th:text="#{newmessage}"></h1>
 <form action = "#" th:action="@{/web/myprofile/create}" th:object="${formData}" method="post">
     <p><label for="title"  th:text="#{title} + ':'"/>
-        <input id="title" type="text" th:field="*{title}"/>
+        <br><input id="title" type="text" th:field="*{title}"/>
     <p th:if="${#fields.hasErrors('title')}"
        th:text="${#strings.listJoin(#fields.errors('title'), ', ')}"></p>
     <p><label for="body" th:text="#{messagebody} + ':'"/>
-        <input id="body" type="text" th:field="*{messageBody}"/>
+        <br><textarea id="body" rows="7" cols="25" th:field="*{messageBody}"></textarea>
     <p th:if="${#fields.hasErrors('messageBody')}"
        th:text="${#strings.listJoin(#fields.errors('messageBody'), ', ')}"></p>
     <p>

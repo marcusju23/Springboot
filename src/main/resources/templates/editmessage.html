@@ -8,9 +8,9 @@
 <h1 th:text="#{updatemessage}"></h1>
 <form action = "#" th:action="@{/web/myprofile/editmessage(id=${messageId})}" th:object="${formData}" method="post">
     <p><label for="title"  th:text="#{title} + ':'"/>
-        <input id="title" type="text" th:field="*{title}"/>
+        <br><input id="title" type="text" th:field="*{title}"/>
     <p><label for="body" th:text="#{messagebody} + ':'"/>
-        <input id="body" type="text" th:field="*{messageBody}"/>
+        <br><textarea id="body" rows="7" cols="25" th:field="*{messageBody}"></textarea>
     <p>
         <label for="privacy" th:text="#{messageprivacy} + ':'"/>
         <select id="privacy" th:field="*{privateMessage}">
