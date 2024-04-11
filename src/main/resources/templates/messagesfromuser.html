@@ -42,7 +42,8 @@
     <a class="left" th:if="${currentPage>0}" th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage - 1}">
         <i class="gg-arrow-left-r"></i>
     </a>
-    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 > 10}" th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage+1}">
+    <a class="right" th:if="${messages.size()==10 && totalPublicMessages -1 >= 10}"
+       th:href="'/web/user?username='+ ${currentUser}+'&page='+${currentPage+1}">
         <i class="gg-arrow-right-r"></i>
     </a>
 </div>

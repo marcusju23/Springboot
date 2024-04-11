@@ -60,7 +60,7 @@
         <a class="left" th:if="${currentPage>0}" th:href="'/web/myprofile?page=' + ${currentPage - 1}">
             <i class="gg-arrow-left-r"></i>
         </a>
-        <a class="right" th:if="${messages.size()==10 && totalMessages -1 > 10}"
+        <a class="right" th:if="${messages.size()==10 && totalMessages -1 >= 10}"
            th:href="'/web/myprofile?page='+${currentPage+1}">
             <i class="gg-arrow-right-r"></i>
         </a>
