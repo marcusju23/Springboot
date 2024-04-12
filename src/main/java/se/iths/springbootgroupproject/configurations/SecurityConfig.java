@@ -26,15 +26,27 @@ public class SecurityConfig {
     SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers("/web/welcome", "/login", "/oauth/**", "/logout", "/error**","/static/**","/api/**").permitAll()
-                        .requestMatchers("/web/myprofile","/web/myprofile/editmessage*","/web/myprofile/create",
-                                "/web/myprofile/edit","/web/messages","/web/messages/translate*","/web/myprofile/deletemessage*", "web/user*").authenticated()
+                        .requestMatchers(
+                                    "/web/welcome",
+                                    "/login",
+                                    "/oauth/**",
+                                    "/logout",
+                                    "/error**",
+                                    "/static/**",
+                                    "/api/**").permitAll()
+                        .requestMatchers(
+                                    "/web/myprofile",
+                                    "/web/myprofile/editmessage*",
+                                    "/web/myprofile/create",
+                                    "/web/myprofile/edit",
+                                    "/web/myprofile/deletemessage*",
+                                    "/web/messages",
+                                    "/web/messages/translate*",
+                                    "/web/user*").authenticated()
                         .anyRequest().denyAll()
                 )
-                .oauth2Login(oauth2 -> oauth2
-                        .userInfoEndpoint(userInfoEndpoint ->
-                                userInfoEndpoint
-                                        .userService(githubOAuth2UserService))
+                .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfoEndpoint ->
+                                userInfoEndpoint.userService(githubOAuth2UserService))
                         .successHandler(oauth2LoginSuccessHandler()))
                 .logout(logout -> logout.logoutSuccessUrl("/web/welcome"));
         return http.build();
@@ -57,4 +69,5 @@ public class SecurityConfig {
     RestClient restClient() {
         return RestClient.create();
     }
+
 }

@@ -18,14 +18,18 @@ public class EditUserFormData {
     @NotNull
     @Size(min = 1, max = 100, message = "Username must be between 1 and 100 characters")
     private String userName;
+
     @NotNull
     @Size(min = 1, max = 100, message = "Firstname must be between 1 and 100 characters")
     private String firstName;
+
     @NotNull
     @Size(min = 1, max = 100, message = "Lastname must be between 1 and 100 characters")
     private String lastName;
-    @Email(message = "PLEASEEE provide a valid email adress u ass")
+
+    @Email
     private String email;
+
     @URL
     private String image;
 

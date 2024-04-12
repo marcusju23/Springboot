@@ -17,9 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestPropertySource(properties = {
-        "spring.datasource.url=jdbc:tc:mysql:8.3.0:///mydatabase"
-})
+@TestPropertySource(properties = {"spring.datasource.url=jdbc:tc:mysql:8.3.0:///mydatabase"})
 class UserRepositoryTest {
     @Autowired
     UserRepository userRepository;
@@ -171,4 +169,5 @@ class UserRepositoryTest {
         user.setGithubId(123456789);
         return user;
     }
+
 }

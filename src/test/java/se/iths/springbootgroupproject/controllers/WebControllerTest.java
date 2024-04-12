@@ -1,6 +1,5 @@
 package se.iths.springbootgroupproject.controllers;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -112,7 +111,7 @@ class WebControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/web/myprofile")
                         .with(oauth2Login()))
                 .andExpectAll(
-                        model().attribute("name", user.getFirstName()+" "+user.getLastName()),
+                        model().attribute("name", user.getFirstName() + " " + user.getLastName()),
                         model().attribute("email", user.getEmail()),
                         model().attribute("userName", user.getUserName()),
                         model().attribute("profilepic", user.getImage()),
@@ -247,4 +246,5 @@ class WebControllerTest {
                         .param("privateMessage", "false"))
                 .andExpect(status().isForbidden());
     }
+
 }

@@ -37,7 +37,7 @@ public class UserService {
         return userRepository.findByUserName(userName);
     }
 
-    public User findByGitHubId(Integer githubId){
+    public User findByGitHubId(Integer githubId) {
         return userRepository.findByGithubId(githubId).orElse(null);
     }
 
@@ -59,4 +59,5 @@ public class UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
 }

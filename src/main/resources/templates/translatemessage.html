@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Translated GilfMessage</title>
+    <title>Translate GilMessage</title>
     <link rel="stylesheet" href="/static/styles.css">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
@@ -12,8 +12,8 @@
     <tr>
         <th th:text="#{title}"></th>
         <th th:text="#{body}"></th>
-        <th class ="author-cell-header" th:text="#{author}"></th>
-        <th class ="date-cell-header" th:text="#{date}"></th>
+        <th class="author-cell-header" th:text="#{author}"></th>
+        <th class="date-cell-header" th:text="#{date}"></th>
         <th class="edit-cell-header" th:text="#{lastedit}"></th>
     </tr>
     </thead>
@@ -24,10 +24,8 @@
         <td class="author-cell" th:text="${userName}">John Doe</td>
         <td class="date-cell" th:text="${date}">2024-02-27</td>
         <td>
-            <p th:text="${lastChanged}">
-            </p>
-            <p th:if="${lastChanged != null}" th:text="#{editedby}+ ':' +${userName}">
-            </p>
+            <p th:text="${lastChanged}"></p>
+            <p th:if="${lastChanged != null}" th:text="#{editedby} + ': ' + ${userName}"></p>
         </td>
     </tr>
     </tbody>

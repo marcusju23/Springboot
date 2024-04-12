@@ -22,7 +22,6 @@ class CreateMessageFormDataTest {
         try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
             validator = factory.getValidator();
         }
-
     }
 
     @Test
@@ -46,4 +45,5 @@ class CreateMessageFormDataTest {
         assertEquals(formData.isPrivateMessage(), message.isPrivateMessage());
         assertEquals(user, message.getUser());
     }
+
 }

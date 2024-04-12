@@ -16,9 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@TestPropertySource(properties = {
-        "spring.datasource.url=jdbc:tc:mysql:8.3.0:///mydatabase"
-})
+@TestPropertySource(properties = {"spring.datasource.url=jdbc:tc:mysql:8.3.0:///mydatabase"})
 class MessageRepositoryTest {
     @Autowired
     MessageRepository messageRepository;
@@ -27,16 +25,17 @@ class MessageRepositoryTest {
 
     @Test
     @DisplayName("Saving a message")
-    void savingAMessageReturn(){
+    void savingAMessageReturn() {
         var message = new Message();
 
         Message insertedMessage = messageRepository.save(message);
 
-        assertThat(entityManager.find(Message.class,insertedMessage.getId())).isEqualTo(message);
+        assertThat(entityManager.find(Message.class, insertedMessage.getId())).isEqualTo(message);
     }
+
     @Test
     @DisplayName("Updating a message")
-    void updatingAUser(){
+    void updatingAUser() {
         var message = new Message();
         message.setTitle("TEST-TITLE");
         entityManager.persist(message);
@@ -47,9 +46,10 @@ class MessageRepositoryTest {
 
         assertThat(entityManager.find(Message.class, message.getId()).getTitle()).isEqualTo(newTitle);
     }
+
     @Test
     @DisplayName("Finding a message by id returns message with that id")
-    void findingAMessageByIdReturnsMessageWithThatId(){
+    void findingAMessageByIdReturnsMessageWithThatId() {
         var message = new Message();
         entityManager.persist(message);
 
@@ -57,9 +57,10 @@ class MessageRepositoryTest {
 
         assertThat(retrievedMessage).contains(message);
     }
+
     @Test
     @DisplayName("Find all returns a list with all messages")
-    void findAllReturnsAListWithAllMessages(){
+    void findAllReturnsAListWithAllMessages() {
         var message = new Message();
         var message2 = new Message();
         entityManager.persist(message);
@@ -67,11 +68,12 @@ class MessageRepositoryTest {
 
         var result = messageRepository.findAll();
 
-        assertThat(result).contains(message,message2);
+        assertThat(result).contains(message, message2);
     }
+
     @Test
     @DisplayName("Deleting a message")
-    void deletingAMessage(){
+    void deletingAMessage() {
         var message = new Message();
         entityManager.persist(message);
 
@@ -79,9 +81,10 @@ class MessageRepositoryTest {
 
         assertThat(entityManager.find(Message.class, message.getId())).isNull();
     }
+
     @Test
     @DisplayName("findAllByPrivateMessageIsFalse returns a list with MessageAndUsername dto where messages are public")
-    void findAllByPrivateMessageIsFalseReturnsAListWithMessageAndUsernameDto(){
+    void findAllByPrivateMessageIsFalseReturnsAListWithMessageAndUsernameDto() {
         var message = new Message();
         message.setPrivateMessage(false);
         var message2 = new Message();
@@ -98,9 +101,10 @@ class MessageRepositoryTest {
         assertThat(result.getFirst().id()).isEqualTo(message.getId());
         assertThat(result.getLast().id()).isEqualTo(message3.getId());
     }
+
     @Test
     @DisplayName("findAllByPrivateMessageIsFalse with Pageable returns list with MessageAndUsername dto where messages are public")
-    void findAllByPrivateMessageIsFalseWithPageableReturnsListWithMessageAndUsernameDto(){
+    void findAllByPrivateMessageIsFalseWithPageableReturnsListWithMessageAndUsernameDto() {
         var message = new Message();
         message.setPrivateMessage(false);
         var message2 = new Message();
@@ -117,9 +121,10 @@ class MessageRepositoryTest {
         assertThat(result).hasSize(1);
         assertThat(result.getFirst().id()).isEqualTo(message.getId());
     }
+
     @Test
     @DisplayName("findAllByUser returns list with MessageAndUsername dto")
-    void findAllByUserReturnsListWithMessageAndUsernameDto(){
+    void findAllByUserReturnsListWithMessageAndUsernameDto() {
         User user = new User();
         User user2 = new User();
         var message = new Message();
@@ -139,9 +144,10 @@ class MessageRepositoryTest {
         assertThat(result.getFirst().id()).isEqualTo(message.getId());
         assertThat(result.getLast().id()).isEqualTo(message3.getId());
     }
+
     @Test
     @DisplayName("findAllByUser with Pageable returns list with MessageAndUsername dto")
-    void findAllByUserWithPageableReturnsListWithMessageAndUsernameDto(){
+    void findAllByUserWithPageableReturnsListWithMessageAndUsernameDto() {
         User user = new User();
         User user2 = new User();
         var message = new Message();
@@ -157,14 +163,15 @@ class MessageRepositoryTest {
         entityManager.persist(user2);
         Pageable pageable = PageRequest.of(0, 1);
 
-        var result = messageRepository.findAllByUser(user,pageable);
+        var result = messageRepository.findAllByUser(user, pageable);
 
         assertThat(result).hasSize(1);
         assertThat(result.getFirst().id()).isEqualTo(message.getId());
     }
+
     @Test
     @DisplayName("Finding a message by title returns message with that id")
-    void findingAMessageByTitleReturnsMessageWithThatId(){
+    void findingAMessageByTitleReturnsMessageWithThatId() {
         var message = new Message();
         message.setTitle("TEST-TITLE");
         entityManager.persist(message);
@@ -173,9 +180,10 @@ class MessageRepositoryTest {
 
         assertThat(retrievedMessage).contains(message);
     }
+
     @Test
     @DisplayName("findAllByUserIdAndPrivateMessageIsFalse returns list with MessageAndUsername dto")
-    void findAllByUserIdAndPrivateMessageIsFalseReturnsListWithMessageAndUsernameDto(){
+    void findAllByUserIdAndPrivateMessageIsFalseReturnsListWithMessageAndUsernameDto() {
         User user = new User();
         User user2 = new User();
         var message = new Message();
@@ -199,4 +207,5 @@ class MessageRepositoryTest {
         assertThat(result.getFirst().id()).isEqualTo(message.getId());
         assertThat(result.getLast().id()).isEqualTo(message3.getId());
     }
+
 }
