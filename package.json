@@ -1,0 +1,28 @@
+{
+  "name": "springboot",
+  "version": "1.0.0",
+  "description": "- Startpage: http://localhost:8080/web/welcome\r - Profilepage: http://localhost:8080/web/myprofile\r - Messagepage: http://localhost:8080/web/messages",
+  "main": "index.js",
+  "dependencies": {
+    "playwright": "^1.52.0",
+    "playwright-core": "^1.52.0",
+    "undici-types": "^6.21.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.14.1"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcusju23/Springboot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/marcusju23/Springboot/issues"
+  },
+  "homepage": "https://github.com/marcusju23/Springboot#readme"
+}
