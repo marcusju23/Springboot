@@ -12,7 +12,11 @@
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.14.1"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "npx playwright test",
+    "ui": "npx playwright test --ui",
+    "codegen": "npx playwright codegen"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marcusju23/Springboot.git"
