@@ -172,3 +172,11 @@ button:hover {
 .register-question a:hover {
     text-decoration: underline;
 }
+
+.error-message {
+    color: #d32f2f;
+    background-color: #fdecea;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
