@@ -71,7 +71,7 @@ td {
 
 /* Header row styles */
 .styled-table thead tr {
-    background-color: #ff0099;
+    background-color: #3C5B6F;
     color: #ffffff;
     text-align: left;
 }
@@ -91,12 +91,12 @@ td {
 /* Active row styles (customize as needed) */
 .styled-table tbody tr.active-row {
     font-weight: bold;
-    color: #ff0099;
+    color: #3C5B6F;
 }
 
 /* Border for the last row */
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #ff0099;
+    border-bottom: 2px solid #3C5B6F;
 }
 
 .date-cell-header,
@@ -124,7 +124,7 @@ td {
 
 .welcome-message {
     text-align: center;
-    color: indigo;
+    color: #373A40;
     font-family: Verdana, sans-serif;
 }
 
