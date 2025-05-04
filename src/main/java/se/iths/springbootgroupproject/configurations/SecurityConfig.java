@@ -45,7 +45,15 @@ public class SecurityConfig {
                                     "/web/user*").authenticated()
                         .anyRequest().denyAll()
                 )
-                .oauth2Login(oauth2 -> oauth2.userInfoEndpoint(userInfoEndpoint ->
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/web/myprofile", true)
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .userInfoEndpoint(userInfoEndpoint ->
                                 userInfoEndpoint.userService(githubOAuth2UserService))
                         .successHandler(oauth2LoginSuccessHandler()))
                 .logout(logout -> logout.logoutSuccessUrl("/web/welcome"));
