@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <!-- Link to your login CSS file -->
+    <link rel="stylesheet" href="static/login.css">
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-wrapper">
+        <h2 class="login-title">Login</h2>
+
+        <!-- Regular Login Form -->
+        <form th:action="@{/login}" method="post" class="login-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username"/>
+            </div>
+
+            <div class="form-group password-group">
+                <label for="password">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" name="password" id="password"/>
+                    <!-- Forgot Password Link -->
+                    <a href="/forgot-password" class="forgot-password">Forgot password?</a>
+                </div>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+            <!-- Additional Links (optional) -->
+            <div class="additional-links">
+                <p class="register-question">Don't have an account? <a href="/register" class="register">Create account</a></p>
+            </div>
+        </form>
+
+        <!-- OAuth Login Button -->
+        <div class="oauth-section">
+            <p class="oauth-text">Other login options:</p>
+            <a th:href="@{/oauth2/authorization/github}" class="oauth-btn github-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1024px-Octicons-mark-github.svg.png" alt="GitHub logo" class="github-icon" />
+                Github
+            </a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
