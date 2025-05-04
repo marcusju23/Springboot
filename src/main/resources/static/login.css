@@ -153,10 +153,11 @@ button:hover {
 .oauth-text {
     font-size: 1rem;
     color: #555;
+    font-weight: bold;
 }
 
 .additional-links {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
 }
 
 .register-question {

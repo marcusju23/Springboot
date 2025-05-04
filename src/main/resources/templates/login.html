@@ -32,19 +32,19 @@
             </div>
 
             <button type="submit" class="login-btn">Login</button>
-            <!-- Additional Links (optional) -->
-            <div class="additional-links">
-                <p class="register-question">Don't have an account? <a href="/register" class="register">Register</a></p>
-            </div>
         </form>
 
         <!-- OAuth Login Button -->
         <div class="oauth-section">
-            <p class="oauth-text">Other login options:</p>
+            <p class="oauth-text">OR</p>
             <a th:href="@{/oauth2/authorization/github}" class="oauth-btn github-btn">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/1024px-Octicons-mark-github.svg.png" alt="GitHub logo" class="github-icon" />
-                Github
+                Continue with Github
             </a>
+        </div>
+        <!-- Additional Links (optional) -->
+        <div class="additional-links">
+            <p class="register-question">Don't have an account? <a href="/register" class="register">Register</a></p>
         </div>
     </div>
 </div>
